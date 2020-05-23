@@ -1,9 +1,6 @@
-#include <omp.h>
-
 #include <array>
 #include <hpkmediods/types/parallelism.hpp>
 #define BOOST_TEST_MODULE test_parallelism
-#include <boost/test/data/monomorphic.hpp>
 #include <boost/test/data/test_case.hpp>
 #include <boost/test/unit_test.hpp>
 
