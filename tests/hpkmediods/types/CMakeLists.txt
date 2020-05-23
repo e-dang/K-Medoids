@@ -1,0 +1,5 @@
+add_executable(test_parallelism test_parallelism.cpp)
+
+target_link_libraries(test_parallelism hpkmediods ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+
+add_test(NAME test_parallelism COMMAND test_parallelism)
