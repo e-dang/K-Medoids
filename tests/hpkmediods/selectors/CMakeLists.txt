@@ -1,0 +1,5 @@
+add_executable(test_uniform_selectors test_uniform_selectors.cpp)
+
+target_link_libraries(test_uniform_selectors hpkmediods ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+
+add_test(NAME test_uniform_selectors COMMAND test_uniform_selectors)
