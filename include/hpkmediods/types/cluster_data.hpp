@@ -26,13 +26,13 @@ public:
 
     void maximize(const IMaximizer<T>* const maximizer);
 
-    const Matrix<T>* const getCentroids() { return &m_centroids; }
+    const Matrix<T>* const getCentroids() const;
 
-    const std::vector<int32_t>* const getClustering() { return &m_assignments; }
+    const std::vector<int32_t>* const getClustering() const;
 
-    const std::vector<T>* const getDistances() { return &m_distances; }
+    const std::vector<T>* const getDistances() const;
 
-    const T getError() { return m_error; }
+    const T getError() const;
 
 private:
     const Matrix<T>* p_data;
