@@ -224,12 +224,12 @@ BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_iter_append_fail, T, test_types, SmallMatr
     BOOST_CHECK_THROW(matrix.append(vec.begin(), vec.end()), std::length_error);
 }
 
-BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_iter_add, T, test_types, SmallMatrix)
+BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_iter_set, T, test_types, SmallMatrix)
 {
     Matrix<T> matrix(rows, cols, autoResize, fillVal);
     std::vector<T> vec(cols);
     std::iota(vec.begin(), vec.end(), 0);
-    matrix.add(rows - 1, vec.begin(), vec.end());
+    matrix.set(rows - 1, vec.begin(), vec.end());
     BOOST_TEST(matrix.numRows() == rows);
     BOOST_TEST(matrix.size() == rows * cols);
     for (int i = 0; i < cols; ++i)
@@ -238,12 +238,12 @@ BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_iter_add, T, test_types, SmallMatrix)
     }
 }
 
-BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_container_add, T, test_types, SmallMatrix)
+BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_container_set, T, test_types, SmallMatrix)
 {
     Matrix<T> matrix(rows, cols, autoResize, fillVal);
     std::vector<T> vec(cols);
     std::iota(vec.begin(), vec.end(), 0);
-    matrix.add(rows - 1, vec);
+    matrix.set(rows - 1, vec);
     BOOST_TEST(matrix.numRows() == rows);
     BOOST_TEST(matrix.size() == rows * cols);
     for (int i = 0; i < cols; ++i)
@@ -252,12 +252,12 @@ BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_container_add, T, test_types, SmallMatrix)
     }
 }
 
-BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_container_r_val_add, T, test_types, SmallMatrix)
+BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_container_r_val_set, T, test_types, SmallMatrix)
 {
     Matrix<T> matrix(rows, cols, autoResize, fillVal);
     std::vector<T> vec(cols);
     std::iota(vec.begin(), vec.end(), 0);
-    matrix.add(rows - 1, std::vector<T>(vec.begin(), vec.end()));
+    matrix.set(rows - 1, std::vector<T>(vec.begin(), vec.end()));
     BOOST_TEST(matrix.numRows() == rows);
     BOOST_TEST(matrix.size() == rows * cols);
     for (int i = 0; i < cols; ++i)

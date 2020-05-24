@@ -110,19 +110,19 @@ public:
     }
 
     template <typename Container>
-    void add(const int32_t row, const Container& datapoint)
+    void set(const int32_t row, const Container& datapoint)
     {
         std::copy(datapoint.cbegin(), datapoint.cend(), rowBegin(row));
     }
 
     template <typename Container>
-    void add(const int32_t row, const Container&& datapoint)
+    void set(const int32_t row, const Container&& datapoint)
     {
         std::copy(datapoint.cbegin(), datapoint.cend(), rowBegin(row));
     }
 
     template <typename Iter>
-    void add(const int32_t row, Iter begin, Iter end)
+    void set(const int32_t row, Iter begin, Iter end)
     {
         std::copy(begin, end, rowBegin(row));
     }
