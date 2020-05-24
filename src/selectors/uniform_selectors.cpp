@@ -24,7 +24,7 @@ UniformSelector::UniformSelector(const int64_t* seed, const int min) : AbstractU
 std::set<int32_t> UniformSelector::select(const int sampleSize, const int32_t containerSize) const
 {
     static RNGType rng(m_seed);
-    static boost::random::uniform_int_distribution<> dist(m_min, containerSize);
+    static boost::random::uniform_int_distribution<> dist(m_min, containerSize - 1);
     static boost::variate_generator<RNGType, boost::random::uniform_int_distribution<>> gen(rng, dist);
 
     std::set<int32_t> selections;

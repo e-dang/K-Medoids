@@ -25,6 +25,6 @@ BOOST_FIXTURE_TEST_CASE(test_serial_uniform_selector, UniformSelectorFixture)
 
     BOOST_TEST(selections.size() == 10);
     BOOST_TEST(std::all_of(selections.begin(), selections.end(),
-                           [&CONTAINER_SIZE](const int32_t val) { return val <= CONTAINER_SIZE && val >= 0; }));
+                           [&CONTAINER_SIZE](const int32_t val) { return val <= CONTAINER_SIZE - 1 && val >= 0; }));
     BOOST_TEST(static_cast<int>(selections.size()) == SELECTION_SIZE);
 }
