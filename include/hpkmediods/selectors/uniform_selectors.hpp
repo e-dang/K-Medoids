@@ -9,6 +9,8 @@ class AbstractUniformSelector
 public:
     AbstractUniformSelector(const int64_t* seed = nullptr, const int min = 0);
 
+    virtual ~AbstractUniformSelector() = default;
+
     virtual std::set<int32_t> select(const int sampleSize, const int32_t containerSize) const = 0;
 
 protected:

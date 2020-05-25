@@ -9,6 +9,8 @@ template <typename T>
 class IInitializer
 {
 public:
+    virtual ~IInitializer() = default;
+
     virtual T initialize(const Matrix<T>* const data, Matrix<T>& centroids, std::vector<int32_t>& assignments,
                          std::vector<T>& sqDistances) const = 0;
 };
