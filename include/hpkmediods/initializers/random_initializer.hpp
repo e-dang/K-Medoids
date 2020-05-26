@@ -6,7 +6,7 @@
 
 namespace hpkmediods
 {
-const std::string RANDOM_INITIALIZER = "random";
+constexpr char RANDOM_INIT[] = "random";
 
 template <typename T, Parallelism Level, class DistanceFunc>
 class RandomInitializer : public IInitializer<T>
