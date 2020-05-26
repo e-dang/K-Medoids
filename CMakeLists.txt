@@ -23,3 +23,8 @@ include_directories(include)
 add_subdirectory(src)
 add_subdirectory(libs)
 add_subdirectory(tests)
+
+add_executable(kmediods src/main.cpp)
+target_link_libraries(kmediods hpkmediods)
+
+message("BUILD TYPE: " ${CMAKE_BUILD_TYPE})
