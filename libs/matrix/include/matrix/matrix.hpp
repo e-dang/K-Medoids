@@ -10,7 +10,7 @@ class Matrix
 {
 public:
     template <bool Const = false>
-    class ForwardIterator
+    class ForwardRowIterator
     {
     public:
         using iterator_category = std::forward_iterator_tag;
@@ -19,26 +19,26 @@ public:
         using pointer           = typename std::conditional_t<Const, const T*, T*>;
         using reference         = typename std::conditional_t<Const, const T&, T&>;
 
-        ForwardIterator() : p_iter(nullptr) {}
+        ForwardRowIterator() : p_iter(nullptr) {}
 
-        ForwardIterator(pointer ptr) : p_iter(ptr) {}
+        ForwardRowIterator(pointer ptr) : p_iter(ptr) {}
 
-        ForwardIterator operator++()
+        ForwardRowIterator operator++()
         {
-            ForwardIterator temp = *this;
+            ForwardRowIterator temp = *this;
             p_iter++;
             return temp;
         }
 
-        ForwardIterator& operator++(int)
+        ForwardRowIterator& operator++(int)
         {
             ++p_iter;
             return *this;
         }
 
-        bool operator==(const ForwardIterator& rhs) const { return p_iter == rhs.p_iter; }
+        bool operator==(const ForwardRowIterator& rhs) const { return p_iter == rhs.p_iter; }
 
-        bool operator!=(const ForwardIterator& rhs) const { return p_iter != rhs.p_iter; }
+        bool operator!=(const ForwardRowIterator& rhs) const { return p_iter != rhs.p_iter; }
 
         template <bool _Const = Const>
         std::enable_if_t<_Const, reference> operator*() const
@@ -58,9 +58,61 @@ public:
         pointer p_iter;
     };
 
+    template <bool Const = false>
+    class ForwardColumnIterator
+    {
+    public:
+        using iterator_category = std::forward_iterator_tag;
+        using value_type        = std::remove_cv_t<T>;
+        using difference_type   = std::ptrdiff_t;
+        using pointer           = typename std::conditional_t<Const, const T*, T*>;
+        using reference         = typename std::conditional_t<Const, const T&, T&>;
+
+        ForwardColumnIterator() : p_iter(nullptr), m_cols(0) {}
+
+        ForwardColumnIterator(pointer ptr, int64_t cols) : p_iter(ptr), m_cols(cols) {}
+
+        ForwardColumnIterator operator++()
+        {
+            ForwardColumnIterator temp = *this;
+            p_iter += m_cols;
+            return temp;
+        }
+
+        ForwardColumnIterator& operator++(int)
+        {
+            p_iter += m_cols;
+            return *this;
+        }
+
+        bool operator==(const ForwardColumnIterator& rhs) const { return p_iter == rhs.p_iter; }
+
+        bool operator!=(const ForwardColumnIterator& rhs) const { return p_iter != rhs.p_iter; }
+
+        template <bool _Const = Const>
+        std::enable_if_t<_Const, reference> operator*() const
+        {
+            assert(p_iter != nullptr);
+            return *p_iter;
+        }
+
+        template <bool _Const = Const>
+        std::enable_if_t<!_Const, reference> operator*()
+        {
+            assert(p_iter != nullptr);
+            return *p_iter;
+        }
+
+    private:
+        pointer p_iter;
+        int64_t m_cols;
+    };
+
     typedef T value_type;
-    typedef ForwardIterator<false> iterator;
-    typedef ForwardIterator<true> const_iterator;
+    typedef ForwardRowIterator<false> row_iterator;
+    typedef ForwardRowIterator<true> const_row_iterator;
+    typedef ForwardColumnIterator<false> col_iterator;
+    typedef ForwardColumnIterator<true> const_col_iterator;
 
     Matrix();
 
@@ -146,25 +198,33 @@ public:
 
     std::pair<int32_t, int32_t> find(const T element) const;
 
-    iterator begin();
+    row_iterator begin();
 
-    const_iterator begin() const;
+    const_row_iterator begin() const;
 
-    const_iterator cbegin() const;
+    const_row_iterator cbegin() const;
 
-    iterator rowBegin(const int64_t row);
+    row_iterator rowBegin(const int64_t row);
 
-    const_iterator crowBegin(const int64_t row) const;
+    col_iterator colBegin(const int64_t col);
 
-    iterator end();
+    const_row_iterator crowBegin(const int64_t row) const;
 
-    const_iterator end() const;
+    const_col_iterator ccolBegin(const int64_t col) const;
 
-    const_iterator cend() const;
+    row_iterator end();
 
-    iterator rowEnd(const int64_t row);
+    const_row_iterator end() const;
 
-    const_iterator crowEnd(const int64_t row) const;
+    const_row_iterator cend() const;
+
+    row_iterator rowEnd(const int64_t row);
+
+    col_iterator colEnd(const int64_t col);
+
+    const_row_iterator crowEnd(const int64_t row) const;
+
+    const_col_iterator ccolEnd(const int64_t col) const;
 
     std::vector<T> extractRow(const int64_t row) const;
 

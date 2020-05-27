@@ -305,6 +305,20 @@ BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_extract_vector, T, test_types, SmallMatrix
     BOOST_TEST(vec == extractedVec, tt::per_element());
 }
 
+BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_find, T, test_types, SmallMatrix)
+{
+    Matrix<T> matrix(rows, cols);
+    std::vector<T> vec(cols);
+    std::iota(vec.begin(), vec.end(), 0);
+    for (int i = 0; i < matrix.rows(); ++i)
+    {
+        matrix.append(vec);
+    }
+    auto coords = matrix.find(25);
+    BOOST_TEST(coords.first == 0);
+    BOOST_TEST(coords.second == 25);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(matrix_accessors)
@@ -366,7 +380,7 @@ BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_const_iterator, T, test_types, SmallMatrix
     }
 }
 
-BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_row_iterator1, T, test_types, SmallMatrix)
+BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_row_iterator, T, test_types, SmallMatrix)
 {
     std::array<Matrix<T>, 2> matrices = { Matrix<T>(1, cols), Matrix<T>(2, cols) };
     for (auto& matrix : matrices)
@@ -376,6 +390,59 @@ BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_row_iterator1, T, test_types, SmallMatrix)
         matrix.append(vec.begin(), vec.end());
         BOOST_REQUIRE_EQUAL(std::distance(matrix.rowBegin(0), matrix.rowEnd(0)), cols);
         BOOST_CHECK_EQUAL_COLLECTIONS(vec.begin(), vec.end(), matrix.rowBegin(0), matrix.rowEnd(0));
+    }
+}
+
+BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_const_row_iterator, T, test_types, SmallMatrix)
+{
+    std::array<Matrix<T>, 2> matrices = { Matrix<T>(1, cols), Matrix<T>(2, cols) };
+    for (auto& matrix : matrices)
+    {
+        std::vector<T> vec(cols);
+        std::iota(vec.begin(), vec.end(), 0);
+        matrix.append(vec.begin(), vec.end());
+        BOOST_REQUIRE_EQUAL(std::distance(matrix.crowBegin(0), matrix.crowEnd(0)), cols);
+        BOOST_CHECK_EQUAL_COLLECTIONS(vec.begin(), vec.end(), matrix.crowBegin(0), matrix.crowEnd(0));
+    }
+}
+
+BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_col_iterator, T, test_types, SmallMatrix)
+{
+    std::array<Matrix<T>, 2> matrices = { Matrix<T>(1, cols), Matrix<T>(6, cols) };
+    for (auto& matrix : matrices)
+    {
+        std::vector<T> vec(cols);
+        std::iota(vec.begin(), vec.end(), 0);
+        for (int i = 0; i < matrix.rows(); ++i)
+        {
+            matrix.append(vec.begin(), vec.end());
+        }
+
+        BOOST_REQUIRE_EQUAL(std::distance(matrix.colBegin(0), matrix.colEnd(0)), matrix.rows());
+        for (int i = 0; i < cols; ++i)
+        {
+            BOOST_TEST(std::all_of(matrix.colBegin(i), matrix.colEnd(i), [&i](T val) { return val == i; }));
+        }
+    }
+}
+
+BOOST_FIXTURE_TEST_CASE_TEMPLATE(test_const_col_iterator, T, test_types, SmallMatrix)
+{
+    std::array<Matrix<T>, 2> matrices = { Matrix<T>(1, cols), Matrix<T>(6, cols) };
+    for (auto& matrix : matrices)
+    {
+        std::vector<T> vec(cols);
+        std::iota(vec.begin(), vec.end(), 0);
+        for (int i = 0; i < matrix.rows(); ++i)
+        {
+            matrix.append(vec.begin(), vec.end());
+        }
+
+        BOOST_REQUIRE_EQUAL(std::distance(matrix.ccolBegin(0), matrix.ccolEnd(0)), matrix.rows());
+        for (int i = 0; i < cols; ++i)
+        {
+            BOOST_TEST(std::all_of(matrix.ccolBegin(i), matrix.ccolEnd(i), [&i](T val) { return val == i; }));
+        }
     }
 }
 

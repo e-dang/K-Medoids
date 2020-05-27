@@ -210,63 +210,87 @@ std::pair<int32_t, int32_t> Matrix<T>::find(const T element) const
 }
 
 template <typename T>
-typename Matrix<T>::iterator Matrix<T>::begin()
+typename Matrix<T>::row_iterator Matrix<T>::begin()
 {
-    return Matrix<T>::iterator(p_data);
+    return Matrix<T>::row_iterator(p_data);
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::begin() const
+typename Matrix<T>::const_row_iterator Matrix<T>::begin() const
 {
-    return Matrix<T>::const_iterator(p_data);
+    return Matrix<T>::const_row_iterator(p_data);
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::cbegin() const
+typename Matrix<T>::const_row_iterator Matrix<T>::cbegin() const
 {
-    return Matrix<T>::const_iterator(p_data);
+    return Matrix<T>::const_row_iterator(p_data);
 }
 
 template <typename T>
-typename Matrix<T>::iterator Matrix<T>::rowBegin(const int64_t row)
+typename Matrix<T>::col_iterator Matrix<T>::colBegin(const int64_t col)
 {
-    return Matrix<T>::iterator(at(row));
+    return Matrix<T>::col_iterator(p_data + col, m_cols);
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::crowBegin(const int64_t row) const
+typename Matrix<T>::row_iterator Matrix<T>::rowBegin(const int64_t row)
 {
-    return Matrix<T>::const_iterator(at(row));
+    return Matrix<T>::row_iterator(at(row));
 }
 
 template <typename T>
-typename Matrix<T>::iterator Matrix<T>::end()
+typename Matrix<T>::const_row_iterator Matrix<T>::crowBegin(const int64_t row) const
 {
-    return Matrix<T>::iterator(p_data + capacity());
+    return Matrix<T>::const_row_iterator(at(row));
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::end() const
+typename Matrix<T>::const_col_iterator Matrix<T>::ccolBegin(const int64_t col) const
 {
-    return Matrix<T>::const_iterator(p_data + capacity());
+    return Matrix<T>::const_col_iterator(p_data + col, m_cols);
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::cend() const
+typename Matrix<T>::row_iterator Matrix<T>::end()
 {
-    return Matrix<T>::const_iterator(p_data + capacity());
+    return Matrix<T>::row_iterator(p_data + capacity());
 }
 
 template <typename T>
-typename Matrix<T>::iterator Matrix<T>::rowEnd(const int64_t row)
+typename Matrix<T>::const_row_iterator Matrix<T>::end() const
 {
-    return Matrix<T>::iterator(at(row) + m_cols);
+    return Matrix<T>::const_row_iterator(p_data + capacity());
 }
 
 template <typename T>
-typename Matrix<T>::const_iterator Matrix<T>::crowEnd(const int64_t row) const
+typename Matrix<T>::const_row_iterator Matrix<T>::cend() const
 {
-    return Matrix<T>::const_iterator(at(row) + m_cols);
+    return Matrix<T>::const_row_iterator(p_data + capacity());
+}
+
+template <typename T>
+typename Matrix<T>::row_iterator Matrix<T>::rowEnd(const int64_t row)
+{
+    return Matrix<T>::row_iterator(at(row) + m_cols);
+}
+
+template <typename T>
+typename Matrix<T>::col_iterator Matrix<T>::colEnd(const int64_t col)
+{
+    return Matrix<T>::col_iterator(p_data + col + (m_numRows * m_cols), m_cols);
+}
+
+template <typename T>
+typename Matrix<T>::const_row_iterator Matrix<T>::crowEnd(const int64_t row) const
+{
+    return Matrix<T>::const_row_iterator(at(row) + m_cols);
+}
+
+template <typename T>
+typename Matrix<T>::const_col_iterator Matrix<T>::ccolEnd(const int64_t col) const
+{
+    return Matrix<T>::const_col_iterator(p_data + col + (m_numRows * m_cols), m_cols);
 }
 
 template <typename T>
