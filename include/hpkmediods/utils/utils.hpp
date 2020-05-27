@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <limits>
 
 namespace hpkmediods
 {
@@ -9,7 +10,7 @@ void print(Iter begin, Iter end)
 {
     for (; begin != end; ++begin)
     {
-        std::cout << begin << " ";
+        std::cout << *begin << " ";
     }
     std::cout << '\n' << std::flush;
 }
@@ -27,5 +28,26 @@ ForwardIt min_element(ForwardIt first, ForwardIt last)
         }
     }
     return smallest;
+}
+
+template <typename Iter>
+typename Iter::value_type getSecondLowest(Iter begin, Iter end)
+{
+    typename Iter::value_type secondLowest = std::numeric_limits<typename Iter::value_type>::max() - 1;
+    typename Iter::value_type lowest       = std::numeric_limits<typename Iter::value_type>::max();
+    for (; begin != end; ++begin)
+    {
+        if (*begin > lowest)
+        {
+            secondLowest = lowest;
+            lowest       = *begin;
+        }
+        else if (*begin > secondLowest && *begin != lowest)
+        {
+            secondLowest = *begin;
+        }
+    }
+
+    return secondLowest;
 }
 }  // namespace hpkmediods
