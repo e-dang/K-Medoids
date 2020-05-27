@@ -7,7 +7,7 @@
 
 namespace hpkmediods
 {
-constexpr char PAM_SWAP[] = "pam_swap";
+constexpr char PAM[] = "pam_swap";
 
 template <typename T, Parallelism Level, class DistanceFunc>
 class PAMSwap : public IMaximizer<T>
