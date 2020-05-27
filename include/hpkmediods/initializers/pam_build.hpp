@@ -30,7 +30,8 @@ public:
             updateDissimilarityMatrix(&dissimilarityMat, data, centroidDistMat, unselected);
             auto candidateIdx = getCandidateIdxForLargestGain(&dissimilarityMat);
 
-            updateCentroidDistanceMatrix(centroids->numRows(), candidateIdx, centroidDistMat, dataDistMat);
+            std::copy(dataDistMat->ccolBegin(candidateIdx), dataDistMat->ccolEnd(candidateIdx),
+                      centroidDistMat->colBegin(centroids->numRows()));
             centroids->append(data->crowBegin(candidateIdx), data->crowEnd(candidateIdx));
             unselected->erase(std::find(unselected->cbegin(), unselected->cend(), candidateIdx));
             selected->push_back(candidateIdx);
@@ -42,16 +43,16 @@ public:
     }
 
 private:
-    void initializeFirstCentroid(const Matrix<T>* const data, const Matrix<T>* const distMat,
+    void initializeFirstCentroid(const Matrix<T>* const data, const Matrix<T>* const dataDistMat,
                                  Matrix<T>* const centroids, Matrix<T>* const centroidDistMat,
                                  std::vector<int32_t>* unselected, std::vector<int32_t>* selected) const
     {
-        auto distanceSums = m_distanceCalc.calculateDistanceSums(distMat);
+        auto distanceSums = m_distanceCalc.calculateDistanceSums(dataDistMat);
         auto minIdx = std::distance(distanceSums.begin(), std::min_element(distanceSums.begin(), distanceSums.end()));
         centroids->append(data->crowBegin(minIdx), data->crowEnd(minIdx));
         unselected->erase(std::find(unselected->cbegin(), unselected->cend(), minIdx));
         selected->push_back(minIdx);
-        updateCentroidDistanceMatrix(0, minIdx, centroidDistMat, distMat);
+        std::copy(dataDistMat->ccolBegin(minIdx), dataDistMat->ccolEnd(minIdx), centroidDistMat->colBegin(0));
     }
 
     template <Parallelism _Level = Level>
@@ -92,15 +93,6 @@ private:
                 dissimilarityMat->at(pointIdx, candidateIdx) =
                   std::max(pointToClosestObjDist - candidatePointDist, 0.0);
             }
-        }
-    }
-
-    void updateCentroidDistanceMatrix(const int32_t centroidIdx, const int32_t dataIdx,
-                                      Matrix<T>* const centroidDistMat, const Matrix<T>* const dataDistMat) const
-    {
-        for (int i = 0; i < dataDistMat->rows(); ++i)
-        {
-            centroidDistMat->at(i, centroidIdx) = dataDistMat->at(i, dataIdx);
         }
     }
 

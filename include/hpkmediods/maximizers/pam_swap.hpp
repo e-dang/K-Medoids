@@ -27,7 +27,8 @@ public:
 
             auto coords = dissimilarityMat.find(minDissimilarity);
             centroids->set(coords.first, data->crowBegin(coords.second), data->crowEnd(coords.second));
-            updateCentroidDistanceMatrix(coords.first, coords.second, centroidDistMat, dataDistMat);
+            std::copy(dataDistMat->ccolBegin(coords.second), dataDistMat->ccolEnd(coords.second),
+                      centroidDistMat->colBegin(coords.first));
             unselected->erase(std::find(unselected->cbegin(), unselected->cend(), coords.second));
             unselected->push_back(selected->at(coords.first));
             selected->at(coords.first) = coords.second;
@@ -103,15 +104,6 @@ private:
         }
 
         dissimilarityMat->set(centroidIdx, totals);
-    }
-
-    void updateCentroidDistanceMatrix(const int32_t centroidIdx, const int32_t dataIdx,
-                                      Matrix<T>* const centroidDistMat, const Matrix<T>* const dataDistMat) const
-    {
-        for (int i = 0; i < dataDistMat->rows(); ++i)
-        {
-            centroidDistMat->at(i, centroidIdx) = dataDistMat->at(i, dataIdx);
-        }
     }
 
 private:
