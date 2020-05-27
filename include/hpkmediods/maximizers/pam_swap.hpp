@@ -46,42 +46,8 @@ private:
     {
         for (int centroidIdx = 0; centroidIdx < centroids->rows(); ++centroidIdx)
         {
-            std::vector<T> totals(data->rows());
-            for (const auto& candidate : *unselected)
-            {
-                std::vector<T> contributionVec;
-                contributionVec.reserve(unselected->size() - 1);
-                for (const auto& point : *unselected)
-                {
-                    if (candidate != point)
-                    {
-                        auto centroidToPointDist =
-                          m_distanceFunc(centroids->crowBegin(centroidIdx), centroids->crowEnd(centroidIdx),
-                                         data->crowBegin(point), data->crowEnd(point));
-
-                        auto pointToClosestCentroidDist =
-                          *min_element(centroidDistMat->crowBegin(point), centroidDistMat->crowEnd(point));
-
-                        auto pointToCandidateDist = m_distanceFunc(data->crowBegin(candidate), data->crowEnd(candidate),
-                                                                   data->crowBegin(point), data->crowEnd(point));
-
-                        if (centroidToPointDist > pointToClosestCentroidDist)
-                            contributionVec.emplace_back(
-                              std::min(pointToCandidateDist - pointToClosestCentroidDist, 0.0));
-                        else if (centroidToPointDist == pointToClosestCentroidDist)
-                        {
-                            auto pointToSecondClosestCentroidDist =
-                              getSecondLowest(centroidDistMat->crowBegin(point), centroidDistMat->crowEnd(point));
-                            contributionVec.emplace_back(
-                              std::min(pointToCandidateDist, pointToSecondClosestCentroidDist) -
-                              pointToClosestCentroidDist);
-                        }
-                    }
-                }
-                totals[candidate] = std::accumulate(contributionVec.cbegin(), contributionVec.cend(), 0.0);
-            }
-
-            dissimilarityMat->set(centroidIdx, totals);
+            maximizeIterImpl(centroidIdx, dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, unselected,
+                             selected);
         }
     }
 
@@ -94,43 +60,49 @@ private:
 #pragma omp parallel for shared(dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, unselected, selected)
         for (int centroidIdx = 0; centroidIdx < centroids->rows(); ++centroidIdx)
         {
-            std::vector<T> totals(data->rows());
-            for (const auto& candidate : *unselected)
+            maximizeIterImpl(centroidIdx, dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, unselected,
+                             selected);
+        }
+    }
+
+    void maximizeIterImpl(const int centroidIdx, Matrix<T>* const dissimilarityMat, const Matrix<T>* const data,
+                          Matrix<T>* const centroids, Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat,
+                          std::vector<int32_t>* const unselected, std::vector<int32_t>* const selected) const
+    {
+        std::vector<T> totals(data->rows());
+        for (const auto& candidate : *unselected)
+        {
+            std::vector<T> contributionVec;
+            contributionVec.reserve(unselected->size() - 1);
+            for (const auto& point : *unselected)
             {
-                std::vector<T> contributionVec;
-                contributionVec.reserve(unselected->size() - 1);
-                for (const auto& point : *unselected)
+                if (candidate != point)
                 {
-                    if (candidate != point)
+                    auto centroidToPointDist =
+                      m_distanceFunc(centroids->crowBegin(centroidIdx), centroids->crowEnd(centroidIdx),
+                                     data->crowBegin(point), data->crowEnd(point));
+
+                    auto pointToClosestCentroidDist =
+                      *min_element(centroidDistMat->crowBegin(point), centroidDistMat->crowEnd(point));
+
+                    auto pointToCandidateDist = m_distanceFunc(data->crowBegin(candidate), data->crowEnd(candidate),
+                                                               data->crowBegin(point), data->crowEnd(point));
+
+                    if (centroidToPointDist > pointToClosestCentroidDist)
+                        contributionVec.emplace_back(std::min(pointToCandidateDist - pointToClosestCentroidDist, 0.0));
+                    else if (centroidToPointDist == pointToClosestCentroidDist)
                     {
-                        auto centroidToPointDist =
-                          m_distanceFunc(centroids->crowBegin(centroidIdx), centroids->crowEnd(centroidIdx),
-                                         data->crowBegin(point), data->crowEnd(point));
-
-                        auto pointToClosestCentroidDist =
-                          *min_element(centroidDistMat->crowBegin(point), centroidDistMat->crowEnd(point));
-
-                        auto pointToCandidateDist = m_distanceFunc(data->crowBegin(candidate), data->crowEnd(candidate),
-                                                                   data->crowBegin(point), data->crowEnd(point));
-
-                        if (centroidToPointDist > pointToClosestCentroidDist)
-                            contributionVec.emplace_back(
-                              std::min(pointToCandidateDist - pointToClosestCentroidDist, 0.0));
-                        else if (centroidToPointDist == pointToClosestCentroidDist)
-                        {
-                            auto pointToSecondClosestCentroidDist =
-                              getSecondLowest(centroidDistMat->crowBegin(point), centroidDistMat->crowEnd(point));
-                            contributionVec.emplace_back(
-                              std::min(pointToCandidateDist, pointToSecondClosestCentroidDist) -
-                              pointToClosestCentroidDist);
-                        }
+                        auto pointToSecondClosestCentroidDist =
+                          getSecondLowest(centroidDistMat->crowBegin(point), centroidDistMat->crowEnd(point));
+                        contributionVec.emplace_back(std::min(pointToCandidateDist, pointToSecondClosestCentroidDist) -
+                                                     pointToClosestCentroidDist);
                     }
                 }
-                totals[candidate] = std::accumulate(contributionVec.cbegin(), contributionVec.cend(), 0.0);
             }
-
-            dissimilarityMat->set(centroidIdx, totals);
+            totals[candidate] = std::accumulate(contributionVec.cbegin(), contributionVec.cend(), 0.0);
         }
+
+        dissimilarityMat->set(centroidIdx, totals);
     }
 
     void updateCentroidDistanceMatrix(const int32_t centroidIdx, const int32_t dataIdx,
