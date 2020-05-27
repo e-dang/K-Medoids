@@ -11,6 +11,8 @@ set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
 
+SET(CMAKE_CXX_FLAGS "-Wall -Wpedantic -fopenmp")
+
 # top level function for debug compile definitions
 function(define_debug_definitions TARGET)
     if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
