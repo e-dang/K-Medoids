@@ -202,6 +202,14 @@ const T& Matrix<T>::at(const int64_t row, const int64_t col) const
 #endif
 
 template <typename T>
+std::pair<int32_t, int32_t> Matrix<T>::find(const T element) const
+{
+    auto iter     = std::find(cbegin(), cend(), element);
+    auto distance = std::distance(cbegin(), iter);
+    return std::make_pair<int32_t, int32_t>(distance / m_cols, distance % m_cols);  // row, col
+}
+
+template <typename T>
 typename Matrix<T>::iterator Matrix<T>::begin()
 {
     return Matrix<T>::iterator(p_data);

@@ -2,6 +2,7 @@
 
 #include <iterator>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 template <typename T>
@@ -142,6 +143,8 @@ public:
     const T* at(const int64_t row) const;
 
     const T& at(const int64_t row, const int64_t col) const;
+
+    std::pair<int32_t, int32_t> find(const T element) const;
 
     iterator begin();
 
