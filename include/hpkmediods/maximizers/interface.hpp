@@ -12,7 +12,8 @@ class IMaximizer
 public:
     virtual ~IMaximizer() = default;
 
-    virtual T maximize(const Matrix<T>* const data, Matrix<T>& centroids, std::vector<int32_t>& assignments,
-                       std::vector<T>& sqDistances) const = 0;
+    virtual T maximize(const Matrix<T>* const data, Matrix<T>* const centroids, std::vector<int32_t>* const assignments,
+                       Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat,
+                       std::set<int32_t>* const unselected, std::vector<int32_t>* const selected) const = 0;
 };
 }  // namespace hpkmediods

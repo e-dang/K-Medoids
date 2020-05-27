@@ -20,10 +20,10 @@ class PAMBuild : public IInitializer<T>
 public:
     void initialize(const Matrix<T>* const data, Matrix<T>* const centroids, std::vector<int32_t>* const assignments,
                     Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::set<int32_t>* const unselected,
-                    std::set<int32_t>* const selected) const override
+                    std::vector<int32_t>* const selected) const override
     {
         m_distanceCalc.calculateDistanceMatrix(data, data, dataDistMat);
-        initializeFirstCentroid(data, dataDistMat, centroids, centroidDistMat, unselected);
+        initializeFirstCentroid(data, dataDistMat, centroids, centroidDistMat, unselected, selected);
 
         Matrix<T> dissimilarityMat(data->rows(), data->rows(), true, std::numeric_limits<T>::min());
         while (centroids->numRows() != centroids->rows())
@@ -34,6 +34,7 @@ public:
             updateCentroidDistanceMatrix(centroids->numRows(), candidateIdx, centroidDistMat, dataDistMat);
             centroids->append(data->crowBegin(candidateIdx), data->crowEnd(candidateIdx));
             unselected->erase(candidateIdx);
+            selected->push_back(candidateIdx);
 
             dissimilarityMat.fill(std::numeric_limits<T>::min());
         }
@@ -44,12 +45,13 @@ public:
 private:
     void initializeFirstCentroid(const Matrix<T>* const data, const Matrix<T>* const distMat,
                                  Matrix<T>* const centroids, Matrix<T>* const centroidDistMat,
-                                 std::set<int32_t>* unselected) const
+                                 std::set<int32_t>* unselected, std::vector<int32_t>* selected) const
     {
         auto distanceSums = m_distanceCalc.calculateDistanceSums(distMat);
         auto minIdx = std::distance(distanceSums.begin(), std::min_element(distanceSums.begin(), distanceSums.end()));
         centroids->append(data->crowBegin(minIdx), data->crowEnd(minIdx));
         unselected->erase(minIdx);
+        selected->push_back(minIdx);
         updateCentroidDistanceMatrix(0, minIdx, centroidDistMat, distMat);
     }
 

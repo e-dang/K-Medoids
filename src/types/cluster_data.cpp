@@ -51,7 +51,8 @@ void ClusterData<T>::initialize(const IInitializer<T>* const initializer)
 template <typename T>
 void ClusterData<T>::maximize(const IMaximizer<T>* const maximizer)
 {
-    m_error = maximizer->maximize(p_data, m_centroids, m_assignments);
+    m_error = maximizer->maximize(p_data, &m_centroids, &m_assignments, &m_dataDistMat, &m_centroidDistMat,
+                                  &m_unselected, &m_selected);
 }
 
 template <typename T>

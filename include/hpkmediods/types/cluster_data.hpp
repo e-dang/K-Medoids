@@ -40,7 +40,7 @@ private:
     std::vector<int32_t> m_assignments;
     Matrix<T> m_dataDistMat;
     Matrix<T> m_centroidDistMat;
-    std::set<int32_t> m_selected;
+    std::vector<int32_t> m_selected;
     std::set<int32_t> m_unselected;
     T m_error;
 };
