@@ -1,6 +1,7 @@
 #pragma once
 
 #include <hpkmediods/maximizers/pam.hpp>
+#include <hpkmediods/maximizers/pam_swap.hpp>
 #include <memory>
 #include <string>
 
@@ -11,6 +12,8 @@ std::shared_ptr<IMaximizer<T>> createMaximizer(const std::string& maximizerStrin
 {
     if (maximizerString == PAM)
         return std::make_shared<PartitionAroundMediods<T, Level, DistanceFunc>>();
+    else if (maximizerString == PAM_SWAP)
+        return std::make_shared<PAMSwap<T, Level, DistanceFunc>>();
     else
         std::cerr << "Unrecognized maximizer string!\n";
 
