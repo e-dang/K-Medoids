@@ -1,11 +1,10 @@
 #pragma once
 
-#pragma once
-
 #include <hpkmediods/initializers/interface.hpp>
 #include <hpkmediods/maximizers/interface.hpp>
 #include <matrix/matrix.hpp>
 #include <memory>
+#include <set>
 #include <vector>
 
 namespace hpkmediods
@@ -30,15 +29,19 @@ public:
 
     const std::vector<int32_t>* const getClustering() const;
 
-    const std::vector<T>* const getDistances() const;
-
     const T getError() const;
+
+private:
+    void initUnselected();
 
 private:
     const Matrix<T>* p_data;
     Matrix<T> m_centroids;
     std::vector<int32_t> m_assignments;
-    std::vector<T> m_distances;
+    Matrix<T> m_dataDistMat;
+    Matrix<T> m_centroidDistMat;
+    std::set<int32_t> m_selected;
+    std::set<int32_t> m_unselected;
     T m_error;
 };
 }  // namespace hpkmediods

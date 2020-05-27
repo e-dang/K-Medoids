@@ -71,6 +71,34 @@ public:
         return cost;
     }
 
+    template <Parallelism _Level = Level>
+    std::enable_if_t<_Level == Parallelism::Serial || _Level == Parallelism::MPI, T> calculateFromDistMat(
+      const Matrix<T>* const centroidDistMat, const std::vector<int32_t>* const assignments)
+    {
+        T cost = 0.0;
+        for (int i = 0; i < centroidDistMat->rows(); ++i)
+        {
+            cost += centroidDistMat->at(i, assignments->at(i));
+        }
+
+        return cost;
+    }
+
+    template <Parallelism _Level = Level>
+    std::enable_if_t<_Level == Parallelism::OMP || _Level == Parallelism::Hybrid, T> calculateFromDistMat(
+      const Matrix<T>* const centroidDistMat, const std::vector<int32_t>* const assignments)
+    {
+        T cost = 0.0;
+
+#pragma omp parallel for shared(centroidDistMat, assignments), schedule(static), reduction(+ : cost)
+        for (int i = 0; i < centroidDistMat->rows(); ++i)
+        {
+            cost += centroidDistMat->at(i, assignments->at(i));
+        }
+
+        return cost;
+    }
+
 private:
     DistanceFunc m_distanceFunc;
 };
