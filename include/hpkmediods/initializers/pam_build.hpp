@@ -61,18 +61,7 @@ private:
     {
         for (const auto& candidateIdx : *unselected)
         {
-            for (const auto& pointIdx : *unselected)
-            {
-                if (candidateIdx != pointIdx)
-                {
-                    auto pointToClosestObjDist =
-                      min_element(centroidDistMat->crowBegin(pointIdx), centroidDistMat->crowEnd(pointIdx));
-                    auto candidatePointDist = m_distanceFunc(data->crowBegin(candidateIdx), data->crowEnd(candidateIdx),
-                                                             data->crowBegin(pointIdx), data->crowEnd(pointIdx));
-                    dissimilarityMat->at(pointIdx, candidateIdx) =
-                      std::max(*pointToClosestObjDist - candidatePointDist, 0.0);
-                }
-            }
+            updateDissimilarityMatrixImpl(candidateIdx, dissimilarityMat, data, centroidDistMat, unselected);
         }
     }
 
@@ -82,18 +71,26 @@ private:
       std::vector<int32_t>* const unselected) const
     {
 #pragma omp parallel for shared(dissimilarityMat, data, centroidDistMat, unselected), schedule(static)
-        for (int32_t i = 0; i < static_cast<int32_t>(unselected->size()); ++i)
+        for (int32_t candidateIdx = 0; candidateIdx < static_cast<int32_t>(unselected->size()); ++candidateIdx)
         {
-            for (const auto& pointIdx : *unselected)
+            updateDissimilarityMatrixImpl(candidateIdx, dissimilarityMat, data, centroidDistMat, unselected);
+        }
+    }
+
+    void updateDissimilarityMatrixImpl(const int candidateIdx, Matrix<T>* const dissimilarityMat,
+                                       const Matrix<T>* const data, const Matrix<T>* const centroidDistMat,
+                                       std::vector<int32_t>* const unselected) const
+    {
+        for (const auto& pointIdx : *unselected)
+        {
+            if (candidateIdx != pointIdx)
             {
-                if (i != pointIdx)
-                {
-                    auto pointToClosestObjDist =
-                      min_element(centroidDistMat->crowBegin(pointIdx), centroidDistMat->crowEnd(pointIdx));
-                    auto candidatePointDist           = m_distanceFunc(data->crowBegin(i), data->crowEnd(i),
-                                                             data->crowBegin(pointIdx), data->crowEnd(pointIdx));
-                    dissimilarityMat->at(pointIdx, i) = std::max(*pointToClosestObjDist - candidatePointDist, 0.0);
-                }
+                auto pointToClosestObjDist =
+                  *min_element(centroidDistMat->crowBegin(pointIdx), centroidDistMat->crowEnd(pointIdx));
+                auto candidatePointDist = m_distanceFunc(data->crowBegin(candidateIdx), data->crowEnd(candidateIdx),
+                                                         data->crowBegin(pointIdx), data->crowEnd(pointIdx));
+                dissimilarityMat->at(pointIdx, candidateIdx) =
+                  std::max(pointToClosestObjDist - candidatePointDist, 0.0);
             }
         }
     }
