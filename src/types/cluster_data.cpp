@@ -1,5 +1,7 @@
 #include <hpkmediods/types/cluster_data.hpp>
 #include <limits>
+#include <numeric>
+
 namespace hpkmediods
 {
 template <typename T>
@@ -23,10 +25,11 @@ ClusterData<T>::ClusterData(const Matrix<T>* const data, const int& numClusters)
     m_dataDistMat(data->rows(), data->rows(), true, std::numeric_limits<T>::max()),
     m_centroidDistMat(data->rows(), numClusters, true, std::numeric_limits<T>::max()),
     m_selected(),
-    m_unselected(),
+    m_unselected(data->rows()),
     m_error(std::numeric_limits<T>::max())
 {
-    initUnselected();
+    m_selected.reserve(numClusters);
+    std::iota(m_unselected.begin(), m_unselected.end(), 0);
 }
 
 template <typename T>
@@ -71,16 +74,6 @@ template <typename T>
 const T ClusterData<T>::getError() const
 {
     return m_error;
-}
-
-template <typename T>
-void ClusterData<T>::initUnselected()
-{
-    auto iter = m_unselected.begin();
-    for (int32_t i = 0; i < p_data->rows(); ++i)
-    {
-        iter = m_unselected.insert(iter, i);
-    }
 }
 
 template class ClusterData<double>;

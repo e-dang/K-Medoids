@@ -32,16 +32,13 @@ public:
     const T getError() const;
 
 private:
-    void initUnselected();
-
-private:
     const Matrix<T>* p_data;
     Matrix<T> m_centroids;
     std::vector<int32_t> m_assignments;
     Matrix<T> m_dataDistMat;
     Matrix<T> m_centroidDistMat;
     std::vector<int32_t> m_selected;
-    std::set<int32_t> m_unselected;
+    std::vector<int32_t> m_unselected;
     T m_error;
 };
 }  // namespace hpkmediods

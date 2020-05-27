@@ -3,7 +3,6 @@
 #include <hpkmediods/maximizers/interface.hpp>
 #include <hpkmediods/utils/clustering_updater.hpp>
 #include <hpkmediods/utils/utils.hpp>
-#include <set>
 
 namespace hpkmediods
 {
@@ -14,7 +13,7 @@ class PAMSwap : public IMaximizer<T>
 {
 public:
     T maximize(const Matrix<T>* const data, Matrix<T>* const centroids, std::vector<int32_t>* const assignments,
-               Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::set<int32_t>* const unselected,
+               Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::vector<int32_t>* const unselected,
                std::vector<int32_t>* const selected) const override
     {
         while (true)
@@ -29,8 +28,8 @@ public:
             auto coords = dissimilarityMat.find(minDissimilarity);
             centroids->set(coords.first, data->crowBegin(coords.second), data->crowEnd(coords.second));
             updateCentroidDistanceMatrix(coords.first, coords.second, centroidDistMat, dataDistMat);
-            unselected->erase(coords.second);
-            unselected->insert(selected->at(coords.first));
+            unselected->erase(std::find(unselected->cbegin(), unselected->cend(), coords.second));
+            unselected->push_back(selected->at(coords.first));
             selected->at(coords.first) = coords.second;
         }
 
@@ -42,7 +41,7 @@ private:
     template <Parallelism _Level = Level>
     std::enable_if_t<_Level == Parallelism::Serial || _Level == Parallelism::MPI> maximizeIter(
       Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Matrix<T>* const centroids,
-      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::set<int32_t>* const unselected,
+      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::vector<int32_t>* const unselected,
       std::vector<int32_t>* const selected) const
     {
         for (int centroidIdx = 0; centroidIdx < centroids->rows(); ++centroidIdx)
@@ -89,7 +88,7 @@ private:
     template <Parallelism _Level = Level>
     std::enable_if_t<_Level == Parallelism::OMP || _Level == Parallelism::Hybrid> maximizeIter(
       Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Matrix<T>* const centroids,
-      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::set<int32_t>* const unselected,
+      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::vector<int32_t>* const unselected,
       std::vector<int32_t>* const selected) const
     {
 #pragma omp parallel for shared(dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, unselected, selected)
