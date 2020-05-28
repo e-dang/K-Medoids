@@ -3,8 +3,6 @@
 #include <hpkmediods/distances.hpp>
 #include <hpkmediods/initializers/initializers.hpp>
 #include <hpkmediods/maximizers/maximizers.hpp>
-#include <hpkmediods/types/cluster_data.hpp>
-#include <hpkmediods/types/parallelism.hpp>
 #include <string>
 
 namespace hpkmediods
@@ -19,31 +17,33 @@ public:
     {
     }
 
-    const ClusterData<T>* const fit(const Matrix<T>* const data, const int& numClusters, const int& numRepeats)
+    const Clusters<T>* const fit(const Matrix<T>* const data, const int& numClusters, const int& numRepeats)
     {
+        auto distMat = DistanceMatrix<T>::template create<Level, DistanceFunc>(data, numClusters);
+
         for (int i = 0; i < numRepeats; ++i)
         {
-            ClusterData<T> clusterData(data, numClusters);
-            clusterData.initialize(p_initializer.get());
-            clusterData.maximize(p_maximizer.get());
-            compareResults(clusterData);
+            Clusters<T> clusters(data, &distMat);
+            p_initializer->initialize(data, &clusters, &distMat);
+            p_maximizer->maximize(data, &clusters, &distMat);
+            compareResults(clusters);
         }
 
         return getResults();
     }
 
-    const ClusterData<T>* const getResults() { return &m_bestClustering; }
+    const Clusters<T>* const getResults() { return &m_bestClusters; }
 
 private:
-    void compareResults(const ClusterData<T>& clusterData)
+    void compareResults(const Clusters<T>& clusters)
     {
-        if (clusterData < m_bestClustering)
-            m_bestClustering = clusterData;
+        if (clusters < m_bestClusters)
+            m_bestClusters = clusters;
     }
 
 private:
     std::shared_ptr<IInitializer<T>> p_initializer;
     std::shared_ptr<IMaximizer<T>> p_maximizer;
-    ClusterData<T> m_bestClustering;
+    Clusters<T> m_bestClusters;
 };
 }  // namespace hpkmediods

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <hpkmediods/types/clusters.hpp>
+#include <hpkmediods/types/distance_matrix.hpp>
 #include <hpkmediods/types/selected_set.hpp>
 #include <matrix/matrix.hpp>
 
@@ -11,8 +13,7 @@ class IMaximizer
 public:
     virtual ~IMaximizer() = default;
 
-    virtual T maximize(const Matrix<T>* const data, Matrix<T>* const centroids, std::vector<int32_t>* const assignments,
-                       Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat,
-                       SelectedSet* const selectedSet) const = 0;
+    virtual void maximize(const Matrix<T>* const data, Clusters<T>* const clusters,
+                          DistanceMatrix<T>* const distMat) const = 0;
 };
 }  // namespace hpkmediods

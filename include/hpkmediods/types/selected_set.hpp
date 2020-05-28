@@ -14,7 +14,7 @@ public:
 
     SelectedSet();
 
-    SelectedSet(const int32_t numDat, const int32_t numClusters);
+    SelectedSet(const int32_t numData, const int32_t numClusters);
 
     void select(const int32_t idx);
 
