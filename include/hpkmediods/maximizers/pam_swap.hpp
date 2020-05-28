@@ -1,7 +1,6 @@
 #pragma once
 
 #include <hpkmediods/maximizers/interface.hpp>
-#include <hpkmediods/utils/clustering_updater.hpp>
 #include <hpkmediods/utils/utils.hpp>
 
 namespace hpkmediods
@@ -12,83 +11,71 @@ template <typename T, Parallelism Level, class DistanceFunc>
 class PAMSwap : public IMaximizer<T>
 {
 public:
-    T maximize(const Matrix<T>* const data, Matrix<T>* const centroids, std::vector<int32_t>* const assignments,
-               Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat,
-               SelectedSet* const selectedSet) const override
+    void maximize(const Matrix<T>* const data, Clusters<T>* const clusters,
+                  DistanceMatrix<T>* const distMat) const override
     {
         while (true)
         {
-            Matrix<T> dissimilarityMat(centroids->rows(), data->rows(), true, std::numeric_limits<T>::max());
-            maximizeIter(&dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, selectedSet);
+            Matrix<T> dissimilarityMat(clusters->size(), data->rows(), true, std::numeric_limits<T>::max());
+            maximizeIter(&dissimilarityMat, data, clusters, distMat);
 
             auto minDissimilarity = *min_element(dissimilarityMat.cbegin(), dissimilarityMat.cend());
             if (minDissimilarity >= 0)
                 break;
 
             auto coords = dissimilarityMat.find(minDissimilarity);
-            centroids->set(coords.first, data->crowBegin(coords.second), data->crowEnd(coords.second));
-            std::copy(dataDistMat->ccolBegin(coords.second), dataDistMat->ccolEnd(coords.second),
-                      centroidDistMat->colBegin(coords.first));
-            selectedSet->replaceSelected(coords.second, coords.first);
+            clusters->swapCentroid(coords.second, coords.first);
         }
 
-        m_updater.updateClusteringFromDistMat(centroidDistMat, assignments);
-        return 0.0;
+        clusters->template calculateAssignments<Level>();
     }
 
 private:
     template <Parallelism _Level = Level>
     std::enable_if_t<_Level == Parallelism::Serial || _Level == Parallelism::MPI> maximizeIter(
-      Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Matrix<T>* const centroids,
-      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, SelectedSet* const selectedSet) const
+      Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Clusters<T>* const clusters,
+      DistanceMatrix<T>* const distMat) const
     {
-        for (int centroidIdx = 0; centroidIdx < centroids->rows(); ++centroidIdx)
+        for (int centroidIdx = 0; centroidIdx < clusters->size(); ++centroidIdx)
         {
-            maximizeIterImpl(centroidIdx, dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, selectedSet);
+            maximizeIterImpl(centroidIdx, dissimilarityMat, data, clusters, distMat);
         }
     }
 
     template <Parallelism _Level = Level>
     std::enable_if_t<_Level == Parallelism::OMP || _Level == Parallelism::Hybrid> maximizeIter(
-      Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Matrix<T>* const centroids,
-      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, SelectedSet* const selectedSet) const
+      Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Clusters<T>* const clusters,
+      DistanceMatrix<T>* const distMat) const
     {
-#pragma omp parallel for shared(dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, selectedSet)
-        for (int centroidIdx = 0; centroidIdx < centroids->rows(); ++centroidIdx)
+#pragma omp parallel for shared(dissimilarityMat, data, clusters, distMat)
+        for (int centroidIdx = 0; centroidIdx < clusters->size(); ++centroidIdx)
         {
-            maximizeIterImpl(centroidIdx, dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, selectedSet);
+            maximizeIterImpl(centroidIdx, dissimilarityMat, data, clusters, distMat);
         }
     }
 
     void maximizeIterImpl(const int centroidIdx, Matrix<T>* const dissimilarityMat, const Matrix<T>* const data,
-                          Matrix<T>* const centroids, Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat,
-                          SelectedSet* const selectedSet) const
+                          Clusters<T>* const clusters, DistanceMatrix<T>* const distMat) const
     {
         std::vector<T> totals(data->rows());
-        for (const auto& candidate : selectedSet->unselected())
+        for (const auto& candidate : clusters->unselected())
         {
             std::vector<T> contributionVec;
-            contributionVec.reserve(selectedSet->unselectedSize() - 1);
-            for (const auto& point : selectedSet->unselected())
+            contributionVec.reserve(clusters->numCandidates() - 1);
+            for (const auto& point : clusters->unselected())
             {
                 if (candidate != point)
                 {
-                    auto centroidToPointDist =
-                      m_distanceFunc(centroids->crowBegin(centroidIdx), centroids->crowEnd(centroidIdx),
-                                     data->crowBegin(point), data->crowEnd(point));
-
-                    auto pointToClosestCentroidDist =
-                      *min_element(centroidDistMat->crowBegin(point), centroidDistMat->crowEnd(point));
-
-                    auto pointToCandidateDist = m_distanceFunc(data->crowBegin(candidate), data->crowEnd(candidate),
-                                                               data->crowBegin(point), data->crowEnd(point));
+                    auto centroidToPointDist        = distMat->distanceToCentroid(point, centroidIdx);
+                    auto pointToClosestCentroidDist = distMat->distanceToClosestCentroid(point);
+                    auto pointToCandidateDist       = distMat->distanceToPoint(candidate, point);
 
                     if (centroidToPointDist > pointToClosestCentroidDist)
                         contributionVec.emplace_back(std::min(pointToCandidateDist - pointToClosestCentroidDist, 0.0));
                     else if (centroidToPointDist == pointToClosestCentroidDist)
                     {
-                        auto pointToSecondClosestCentroidDist =
-                          getSecondLowest(centroidDistMat->crowBegin(point), centroidDistMat->crowEnd(point));
+                        auto range                            = distMat->getAllDistancesToCentroids(point);
+                        auto pointToSecondClosestCentroidDist = getSecondLowest(range.first, range.second);
                         contributionVec.emplace_back(std::min(pointToCandidateDist, pointToSecondClosestCentroidDist) -
                                                      pointToClosestCentroidDist);
                     }
@@ -99,9 +86,5 @@ private:
 
         dissimilarityMat->set(centroidIdx, totals);
     }
-
-private:
-    ClusteringUpdater<T, Level> m_updater;
-    DistanceFunc m_distanceFunc;
 };
 }  // namespace hpkmediods
