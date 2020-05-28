@@ -9,7 +9,7 @@ namespace hpkmediods
 {
 constexpr char PAM_INIT[] = "pam_build";
 
-template <typename T, Parallelism Level, class DistanceFunc>
+template <typename T, Parallelism Level>
 class PAMBuild : public IInitializer<T>
 {
 public:

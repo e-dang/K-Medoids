@@ -12,7 +12,7 @@ class KMediods
 {
 public:
     KMediods(const std::string& initializer, const std::string& maximizer) :
-        p_initializer(createInitializer<T, Level, DistanceFunc>(initializer)),
+        p_initializer(createInitializer<T, Level>(initializer)),
         p_maximizer(createMaximizer<T, Level, DistanceFunc>(maximizer))
     {
     }
