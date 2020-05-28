@@ -76,9 +76,27 @@ private:
         }
     }
 
-    std::vector<T> calculateDistanceSums(const DistanceMatrix<T>* const distMat) const
+    template <Parallelism _Level = Level>
+    std::enable_if_t<_Level == Parallelism::Serial || _Level == Parallelism::MPI, std::vector<T>> calculateDistanceSums(
+      const DistanceMatrix<T>* const distMat) const
     {
         std::vector<T> distanceSums(distMat->numPoints());
+        for (int i = 0; i < distMat->numPoints(); ++i)
+        {
+            auto range      = distMat->getAllDistancesToPoints(i);
+            distanceSums[i] = std::accumulate(range.first, range.second, 0.0);
+        }
+
+        return distanceSums;
+    }
+
+    template <Parallelism _Level = Level>
+    std::enable_if_t<_Level == Parallelism::OMP || _Level == Parallelism::Hybrid, std::vector<T>> calculateDistanceSums(
+      const DistanceMatrix<T>* const distMat) const
+    {
+        std::vector<T> distanceSums(distMat->numPoints());
+
+#pragma omp parallel for shared(distanceSums), schedule(static)
         for (int i = 0; i < distMat->numPoints(); ++i)
         {
             auto range      = distMat->getAllDistancesToPoints(i);
