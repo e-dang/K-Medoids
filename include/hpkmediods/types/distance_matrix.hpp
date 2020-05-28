@@ -1,7 +1,7 @@
 #pragma once
 
-#include <hpkmediods/distance_calculator.hpp>
 #include <hpkmediods/types/parallelism.hpp>
+#include <hpkmediods/utils/distance_calculator.hpp>
 #include <matrix/matrix.hpp>
 #include <utility>
 

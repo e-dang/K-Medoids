@@ -3,6 +3,7 @@
 #include <hpkmediods/types/parallelism.hpp>
 #include <matrix/matrix.hpp>
 #include <type_traits>
+
 namespace hpkmediods
 {
 template <typename T, Parallelism Level, class DistanceFunc>
