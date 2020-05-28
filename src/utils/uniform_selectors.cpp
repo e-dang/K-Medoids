@@ -1,9 +1,7 @@
-#include <omp.h>
-
 #include <boost/generator_iterator.hpp>
 #include <boost/random.hpp>
 #include <chrono>
-#include <hpkmediods/selectors/uniform_selectors.hpp>
+#include <hpkmediods/utils/uniform_selectors.hpp>
 
 namespace hpkmediods
 {

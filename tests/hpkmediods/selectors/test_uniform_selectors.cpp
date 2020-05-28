@@ -1,4 +1,4 @@
-#include <hpkmediods/selectors/uniform_selectors.hpp>
+#include <hpkmediods/utils/uniform_selectors.hpp>
 #define BOOST_TEST_MODULE test_parallelism
 #include <boost/test/data/test_case.hpp>
 #include <boost/test/unit_test.hpp>
