@@ -42,7 +42,7 @@ void Clusters<T>::addCentroid(const int32_t dataIdx)
 {
     m_centroids.append(p_data->crowBegin(dataIdx), p_data->crowEnd(dataIdx));
     m_selectedSet.select(dataIdx);
-    p_distMat->updateDistancesToCentroid(dataIdx, m_selectedSet.selectedSize());
+    p_distMat->updateDistancesToCentroid(dataIdx, size() - 1);
 }
 
 template <typename T>
