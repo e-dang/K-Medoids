@@ -27,7 +27,7 @@ public:
             clusters->swapCentroid(coords.second, coords.first);
         }
 
-        clusters->template calculateAssignments<Level>();
+        clusters->template calculateAssignmentsFromDistMat<Level>();
     }
 
 private:
