@@ -7,10 +7,10 @@
 namespace hpkmediods
 {
 template <typename T, Parallelism Level>
-std::shared_ptr<IMaximizer<T>> createMaximizer(const std::string& maximizerString)
+std::unique_ptr<IMaximizer<T>> createMaximizer(const std::string& maximizerString)
 {
     if (maximizerString == PAM)
-        return std::make_shared<PAMSwap<T, Level>>();
+        return std::make_unique<PAMSwap<T, Level>>();
     else
         std::cerr << "Unrecognized maximizer string!\n";
 

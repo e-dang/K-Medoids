@@ -9,12 +9,12 @@
 namespace hpkmediods
 {
 template <typename T, Parallelism Level>
-std::shared_ptr<IInitializer<T>> createInitializer(const std::string& initializerString)
+std::unique_ptr<IInitializer<T>> createInitializer(const std::string& initializerString)
 {
     if (initializerString == RANDOM_INIT)
-        return std::make_shared<RandomInitializer<T>>();
+        return std::make_unique<RandomInitializer<T>>();
     else if (initializerString == PAM_INIT)
-        return std::make_shared<PAMBuild<T, Level>>();
+        return std::make_unique<PAMBuild<T, Level>>();
     else
         std::cerr << "Unrecognized initializer string!\n";
 

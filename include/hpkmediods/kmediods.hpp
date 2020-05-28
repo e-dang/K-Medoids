@@ -41,8 +41,8 @@ private:
     }
 
 private:
-    std::shared_ptr<IInitializer<T>> p_initializer;
-    std::shared_ptr<IMaximizer<T>> p_maximizer;
+    std::unique_ptr<IInitializer<T>> p_initializer;
+    std::unique_ptr<IMaximizer<T>> p_maximizer;
     Clusters<T> m_bestClusters;
 };
 }  // namespace hpkmediods
