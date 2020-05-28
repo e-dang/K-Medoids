@@ -3,6 +3,7 @@ find_package(Boost 1.72.0 COMPONENTS random, timer)
 
 add_library(hpkmediods types/parallelism.cpp
                        types/cluster_data.cpp
+                       types/selected_set.cpp
                        selectors/uniform_selectors.cpp
                        filesystem/file_rotator.cpp)
 

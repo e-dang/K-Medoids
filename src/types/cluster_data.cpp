@@ -1,6 +1,5 @@
 #include <hpkmediods/types/cluster_data.hpp>
 #include <limits>
-#include <numeric>
 
 namespace hpkmediods
 {
@@ -11,8 +10,7 @@ ClusterData<T>::ClusterData() :
     m_assignments(),
     m_dataDistMat(),
     m_centroidDistMat(),
-    m_selected(),
-    m_unselected(),
+    m_selectedSet(),
     m_error(std::numeric_limits<T>::max())
 {
 }
@@ -24,12 +22,9 @@ ClusterData<T>::ClusterData(const Matrix<T>* const data, const int& numClusters)
     m_assignments(data->rows(), -1),
     m_dataDistMat(data->rows(), data->rows(), true, std::numeric_limits<T>::max()),
     m_centroidDistMat(data->rows(), numClusters, true, std::numeric_limits<T>::max()),
-    m_selected(),
-    m_unselected(data->rows()),
+    m_selectedSet(data->rows(), numClusters),
     m_error(std::numeric_limits<T>::max())
 {
-    m_selected.reserve(numClusters);
-    std::iota(m_unselected.begin(), m_unselected.end(), 0);
 }
 
 template <typename T>
@@ -47,15 +42,14 @@ bool ClusterData<T>::operator>(const ClusterData<T>& rhs) const
 template <typename T>
 void ClusterData<T>::initialize(const IInitializer<T>* const initializer)
 {
-    initializer->initialize(p_data, &m_centroids, &m_assignments, &m_dataDistMat, &m_centroidDistMat, &m_unselected,
-                            &m_selected);
+    initializer->initialize(p_data, &m_centroids, &m_assignments, &m_dataDistMat, &m_centroidDistMat, &m_selectedSet);
 }
 
 template <typename T>
 void ClusterData<T>::maximize(const IMaximizer<T>* const maximizer)
 {
-    m_error = maximizer->maximize(p_data, &m_centroids, &m_assignments, &m_dataDistMat, &m_centroidDistMat,
-                                  &m_unselected, &m_selected);
+    m_error =
+      maximizer->maximize(p_data, &m_centroids, &m_assignments, &m_dataDistMat, &m_centroidDistMat, &m_selectedSet);
 }
 
 template <typename T>

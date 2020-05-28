@@ -25,9 +25,7 @@ public:
         {
             ClusterData<T> clusterData(data, numClusters);
             clusterData.initialize(p_initializer.get());
-            std::cout << "initialized\n";
             clusterData.maximize(p_maximizer.get());
-            std::cout << "maximized\n";
             compareResults(clusterData);
         }
 
@@ -40,9 +38,7 @@ private:
     void compareResults(const ClusterData<T>& clusterData)
     {
         if (clusterData < m_bestClustering)
-        {
             m_bestClustering = clusterData;
-        }
     }
 
 private:

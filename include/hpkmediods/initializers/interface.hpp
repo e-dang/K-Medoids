@@ -1,7 +1,7 @@
 #pragma once
 
+#include <hpkmediods/types/selected_set.hpp>
 #include <matrix/matrix.hpp>
-#include <vector>
 
 namespace hpkmediods
 {
@@ -13,7 +13,6 @@ public:
 
     virtual void initialize(const Matrix<T>* const data, Matrix<T>* const centroids,
                             std::vector<int32_t>* const assignments, Matrix<T>* const dataDistMat,
-                            Matrix<T>* const centroidDistMat, std::vector<int32_t>* const unselected,
-                            std::vector<int32_t>* const selected) const = 0;
+                            Matrix<T>* const centroidDistMat, SelectedSet* const selectedSet) const = 0;
 };
 }  // namespace hpkmediods

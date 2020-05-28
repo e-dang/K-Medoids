@@ -12,10 +12,11 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
 
 SET(CMAKE_CXX_FLAGS "-Wall -Wpedantic -fopenmp")
+cmake_policy(SET CMP0064 NEW) # allow TEST operator in 'if' statements
 
 # top level function for debug compile definitions
 function(define_debug_definitions TARGET)
-    if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    if (${CMAKE_BUILD_TYPE} STREQUAL "Debug" OR TEST TARGET)
         target_compile_definitions(${TARGET} PUBLIC DEBUG)
     endif()
 endfunction()

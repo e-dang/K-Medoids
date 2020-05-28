@@ -1,5 +1,8 @@
 add_executable(test_parallelism test_parallelism.cpp)
+add_executable(test_selected_set test_selected_set.cpp)
 
 target_link_libraries(test_parallelism hpkmediods ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+target_link_libraries(test_selected_set hpkmediods ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
 add_test(NAME test_parallelism COMMAND test_parallelism)
+add_test(NAME test_selected_set COMMAND test_selected_set)

@@ -2,6 +2,7 @@
 
 #include <hpkmediods/initializers/interface.hpp>
 #include <hpkmediods/maximizers/interface.hpp>
+#include <hpkmediods/types/selected_set.hpp>
 #include <matrix/matrix.hpp>
 #include <memory>
 #include <set>
@@ -37,8 +38,9 @@ private:
     std::vector<int32_t> m_assignments;
     Matrix<T> m_dataDistMat;
     Matrix<T> m_centroidDistMat;
-    std::vector<int32_t> m_selected;
-    std::vector<int32_t> m_unselected;
+    SelectedSet m_selectedSet;
+    // std::vector<int32_t> m_selected;
+    // std::vector<int32_t> m_unselected;
     T m_error;
 };
 }  // namespace hpkmediods

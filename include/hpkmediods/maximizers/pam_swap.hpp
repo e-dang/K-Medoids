@@ -13,13 +13,13 @@ class PAMSwap : public IMaximizer<T>
 {
 public:
     T maximize(const Matrix<T>* const data, Matrix<T>* const centroids, std::vector<int32_t>* const assignments,
-               Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::vector<int32_t>* const unselected,
-               std::vector<int32_t>* const selected) const override
+               Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat,
+               SelectedSet* const selectedSet) const override
     {
         while (true)
         {
             Matrix<T> dissimilarityMat(centroids->rows(), data->rows(), true, std::numeric_limits<T>::max());
-            maximizeIter(&dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, unselected, selected);
+            maximizeIter(&dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, selectedSet);
 
             auto minDissimilarity = *min_element(dissimilarityMat.cbegin(), dissimilarityMat.cend());
             if (minDissimilarity >= 0)
@@ -29,9 +29,10 @@ public:
             centroids->set(coords.first, data->crowBegin(coords.second), data->crowEnd(coords.second));
             std::copy(dataDistMat->ccolBegin(coords.second), dataDistMat->ccolEnd(coords.second),
                       centroidDistMat->colBegin(coords.first));
-            unselected->erase(std::find(unselected->cbegin(), unselected->cend(), coords.second));
-            unselected->push_back(selected->at(coords.first));
-            selected->at(coords.first) = coords.second;
+            selectedSet->replaceSelected(coords.second, coords.first);
+            // unselected->erase(std::find(unselected->cbegin(), unselected->cend(), coords.second));
+            // unselected->push_back(selected->at(coords.first));
+            // selected->at(coords.first) = coords.second;
         }
 
         m_updater.updateClusteringFromDistMat(centroidDistMat, assignments);
@@ -42,40 +43,36 @@ private:
     template <Parallelism _Level = Level>
     std::enable_if_t<_Level == Parallelism::Serial || _Level == Parallelism::MPI> maximizeIter(
       Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Matrix<T>* const centroids,
-      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::vector<int32_t>* const unselected,
-      std::vector<int32_t>* const selected) const
+      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, SelectedSet* const selectedSet) const
     {
         for (int centroidIdx = 0; centroidIdx < centroids->rows(); ++centroidIdx)
         {
-            maximizeIterImpl(centroidIdx, dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, unselected,
-                             selected);
+            maximizeIterImpl(centroidIdx, dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, selectedSet);
         }
     }
 
     template <Parallelism _Level = Level>
     std::enable_if_t<_Level == Parallelism::OMP || _Level == Parallelism::Hybrid> maximizeIter(
       Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Matrix<T>* const centroids,
-      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, std::vector<int32_t>* const unselected,
-      std::vector<int32_t>* const selected) const
+      Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat, SelectedSet* const selectedSet) const
     {
-#pragma omp parallel for shared(dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, unselected, selected)
+#pragma omp parallel for shared(dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, selectedSet)
         for (int centroidIdx = 0; centroidIdx < centroids->rows(); ++centroidIdx)
         {
-            maximizeIterImpl(centroidIdx, dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, unselected,
-                             selected);
+            maximizeIterImpl(centroidIdx, dissimilarityMat, data, centroids, dataDistMat, centroidDistMat, selectedSet);
         }
     }
 
     void maximizeIterImpl(const int centroidIdx, Matrix<T>* const dissimilarityMat, const Matrix<T>* const data,
                           Matrix<T>* const centroids, Matrix<T>* const dataDistMat, Matrix<T>* const centroidDistMat,
-                          std::vector<int32_t>* const unselected, std::vector<int32_t>* const selected) const
+                          SelectedSet* const selectedSet) const
     {
         std::vector<T> totals(data->rows());
-        for (const auto& candidate : *unselected)
+        for (const auto& candidate : selectedSet->unselected())
         {
             std::vector<T> contributionVec;
-            contributionVec.reserve(unselected->size() - 1);
-            for (const auto& point : *unselected)
+            contributionVec.reserve(selectedSet->unselectedSize() - 1);
+            for (const auto& point : selectedSet->unselected())
             {
                 if (candidate != point)
                 {
