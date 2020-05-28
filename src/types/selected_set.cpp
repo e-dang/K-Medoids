@@ -20,23 +20,11 @@ void SelectedSet::select(const int32_t idx)
     m_selected.push_back(idx);
 }
 
-// void SelectedSet::select(const int32_t dataIdx, const int32_t centroidIdx)
-// {
-//     m_unselected.erase(std::find(cunseleBegin(), cunseleEnd(), dataIdx));
-//     m_selected[centroidIdx] = dataIdx;
-// }
-
 void SelectedSet::replaceSelected(const int32_t dataIdx, const int32_t centroidIdx)
 {
-    // m_selected.erase(std::find(cseleBegin(), cseleEnd(), idx));
-    // m_unselected.push_back(idx);
     m_unselected.push_back(m_selected[centroidIdx]);
     m_unselected.erase(std::find(cunseleBegin(), cunseleEnd(), dataIdx));
     m_selected[centroidIdx] = dataIdx;
-    // select(dataIdx, centroidIdx);
-    // m_unselected.erase(std::find(m_unselected->cbegin(), m_unselected->cend(), coords.second));
-    // m_unselected.push_back(m_selected->at(coords.first));
-    // m_selected->at(coords.first) = coords.second;
 }
 
 bool SelectedSet::seleContains(const int32_t idx)

@@ -30,9 +30,6 @@ public:
             std::copy(dataDistMat->ccolBegin(coords.second), dataDistMat->ccolEnd(coords.second),
                       centroidDistMat->colBegin(coords.first));
             selectedSet->replaceSelected(coords.second, coords.first);
-            // unselected->erase(std::find(unselected->cbegin(), unselected->cend(), coords.second));
-            // unselected->push_back(selected->at(coords.first));
-            // selected->at(coords.first) = coords.second;
         }
 
         m_updater.updateClusteringFromDistMat(centroidDistMat, assignments);

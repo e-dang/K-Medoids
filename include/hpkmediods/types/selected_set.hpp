@@ -18,8 +18,6 @@ public:
 
     void select(const int32_t idx);
 
-    // void select(const int32_t dataIdx, const int32_t centroidIdx);
-
     void replaceSelected(const int32_t idx, const int32_t centroidIdx);
 
     bool seleContains(const int32_t idx);
