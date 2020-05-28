@@ -15,6 +15,17 @@ Clusters<T>::Clusters() :
 }
 
 template <typename T>
+Clusters<T>::Clusters(const Matrix<T>* const data, const Matrix<T>* const centroids) :
+    m_error(std::numeric_limits<T>::max()),
+    p_data(data),
+    p_distMat(nullptr),
+    m_selectedSet(),
+    m_assignments(data->rows()),
+    m_centroids(*centroids)
+{
+}
+
+template <typename T>
 Clusters<T>::Clusters(const Matrix<T>* const data, DistanceMatrix<T>* const distMat) :
     m_error(std::numeric_limits<T>::max()),
     p_data(data),
