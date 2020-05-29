@@ -1,5 +1,7 @@
 #pragma once
 
+#include <mpi.h>
+
 #include <iostream>
 #include <limits>
 
@@ -49,5 +51,13 @@ typename Iter::value_type getSecondLowest(Iter begin, Iter end)
     }
 
     return secondLowest;
+}
+
+template <typename T>
+MPI_Datatype matchMPIType()
+{
+    MPI_Datatype dtype;
+    MPI_Type_match_size(MPI_TYPECLASS_REAL, sizeof(T), &dtype);
+    return dtype;
 }
 }  // namespace hpkmediods

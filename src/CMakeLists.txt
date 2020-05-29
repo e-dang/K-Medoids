@@ -8,4 +8,4 @@ add_library(hpkmediods types/parallelism.cpp
                        utils/uniform_selectors.cpp
                        filesystem/file_rotator.cpp)
 
-target_link_libraries(hpkmediods PUBLIC matrix ${Boost_LIBRARIES})
+target_link_libraries(hpkmediods PUBLIC matrix ${MPI_LIBRARIES} ${Boost_LIBRARIES})
