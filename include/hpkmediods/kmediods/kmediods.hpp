@@ -33,7 +33,7 @@ public:
         return getResults();
     }
 
-    const Clusters<T>* const getResults() { return &m_bestClusters; }
+    const Clusters<T>* const getResults() const { return &m_bestClusters; }
 
 protected:
     void compareResults(const Clusters<T>& candidateClusters, Clusters<T>& bestClusters)
@@ -49,4 +49,4 @@ private:
     std::unique_ptr<IInitializer<T>> p_initializer;
     std::unique_ptr<IMaximizer<T>> p_maximizer;
 };
-}
+}  // namespace hpkmediods

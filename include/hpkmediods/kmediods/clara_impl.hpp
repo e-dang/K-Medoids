@@ -25,7 +25,7 @@ public:
     virtual const Clusters<T>* const fit(const Matrix<T>* const data, const int& numClusters, const int& numRepeats,
                                          const int numSamplingIters) = 0;
 
-    const Clusters<T>* const getResults() { return &m_bestNonSampledClusters; }
+    const Clusters<T>* const getResults() const { return &m_bestNonSampledClusters; }
 
 protected:
     Sampler<T> m_sampler;
