@@ -34,7 +34,7 @@ public:
         auto selections = m_selector.select(sampleSize, data->rows());
         std::vector<int32_t> selectionVec(selections.cbegin(), selections.cend());
 
-#pragma omp parallel for shared(data, sampledData, selectionVec, selections), schedule(static)
+#pragma omp parallel for shared(sampledData, selectionVec, selections), schedule(static)
         for (int i = 0; i < static_cast<int>(selectionVec.size()); ++i)
         {
             sampledData.set(i, data->crowBegin(selectionVec[i]), data->crowEnd(selectionVec[i]));

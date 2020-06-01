@@ -34,7 +34,7 @@ public:
     {
         Matrix<T> distanceMat(mat1->rows(), mat2->rows(), true, std::numeric_limits<T>::max());
 
-#pragma omp parallel for shared(mat1, mat2, distanceMat), schedule(static)
+#pragma omp parallel for shared(distanceMat), schedule(static)
         for (int i = 0; i < mat1->rows(); ++i)
         {
             for (int j = 0; j < mat2->numRows(); ++j)

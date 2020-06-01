@@ -47,7 +47,7 @@ private:
       Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Clusters<T>* const clusters,
       DistanceMatrix<T>* const distMat) const
     {
-#pragma omp parallel for shared(dissimilarityMat, data, clusters, distMat)
+#pragma omp parallel for
         for (int centroidIdx = 0; centroidIdx < clusters->size(); ++centroidIdx)
         {
             maximizeIterImpl(centroidIdx, dissimilarityMat, data, clusters, distMat);

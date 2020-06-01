@@ -53,7 +53,7 @@ private:
       Matrix<T>* const dissimilarityMat, const Matrix<T>* const data, Clusters<T>* const clusters,
       const DistanceMatrix<T>* const distMat) const
     {
-#pragma omp parallel for shared(dissimilarityMat, data, clusters, distMat), schedule(static)
+#pragma omp parallel for schedule(static)
         for (int32_t candidateIdx = 0; candidateIdx < static_cast<int32_t>(clusters->numCandidates()); ++candidateIdx)
         {
             updateDissimilarityMatrixImpl(candidateIdx, dissimilarityMat, data, clusters, distMat);
