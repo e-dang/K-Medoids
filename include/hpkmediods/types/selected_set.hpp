@@ -1,6 +1,9 @@
 #pragma once
 
 #include <vector>
+#ifndef __clang__
+    #include <cstdint>
+#endif
 
 namespace hpkmediods
 {

@@ -1,5 +1,9 @@
 #include <hpkmediods/types/selected_set.hpp>
 #include <numeric>
+#ifndef __clang__
+    #include <algorithm>
+    #include <stdexcept>
+#endif
 
 namespace hpkmediods
 {
