@@ -26,6 +26,8 @@ public:
 
     const Clusters<T>* const getResults() { return p_impl->getResults(); }
 
+    void reset() { p_impl->reset(); }
+
 private:
     std::unique_ptr<impl_type> p_impl;
 };

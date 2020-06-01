@@ -27,6 +27,12 @@ public:
 
     const Clusters<T>* const getResults() const { return &m_bestNonSampledClusters; }
 
+    virtual void reset() override
+    {
+        m_bestNonSampledClusters = Clusters<T>();
+        KMediods<T, Level, DistanceFunc>::reset();
+    }
+
 protected:
     Sampler<T> m_sampler;
     Clusters<T> m_bestNonSampledClusters;
@@ -96,6 +102,12 @@ public:
         MPI_Barrier(MPI_COMM_WORLD);
 
         return this->getResults();
+    }
+
+    void reset() override
+    {
+        m_samplesIssued = 0;
+        CLARAKMediodsImpl<T, Level, DistanceFunc>::reset();
     }
 
 private:

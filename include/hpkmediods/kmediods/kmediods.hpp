@@ -35,6 +35,8 @@ public:
 
     const Clusters<T>* const getResults() const { return &m_bestClusters; }
 
+    virtual void reset() { m_bestClusters = Clusters<T>(); }
+
 protected:
     void compareResults(const Clusters<T>& candidateClusters, Clusters<T>& bestClusters)
     {
