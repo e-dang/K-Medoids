@@ -4,6 +4,9 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#ifndef __clang__
+    #include <assert.h>
+#endif
 
 template <typename T>
 class Matrix

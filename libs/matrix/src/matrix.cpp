@@ -1,6 +1,9 @@
 #include <exception>
 #include <matrix.hpp>
 #include <string>
+#ifndef __clang__
+    #include <algorithm>
+#endif
 
 template <typename T>
 Matrix<T>::Matrix() : m_rows(0), m_cols(0), m_capacity(0), m_numRows(0), m_size(0), p_data(nullptr)
