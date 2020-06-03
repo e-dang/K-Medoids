@@ -26,8 +26,8 @@ constexpr Parallelism getParallelism()
 
 constexpr char kmediodsMethod[]   = METHOD;
 constexpr Parallelism parallelism = getParallelism();
-constexpr int numData             = 20000;
-constexpr int dims                = 2;
+constexpr int numData             = 10000;
+constexpr int dims                = 10;
 constexpr int numClusters         = 10;
 constexpr int numIters            = 10;
 constexpr int repeats             = 1;
@@ -99,7 +99,7 @@ void distributed(std::string& filepath)
     if (rank == 0)
     {
         std::cout << "Error: " << results->getError() << "\n";
-        writer.writeClusterResults(results, 0, filepath);
+        // writer.writeClusterResults(results, 0, filepath);
     }
 
     MPI_Finalize();
