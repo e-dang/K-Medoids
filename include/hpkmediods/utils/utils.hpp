@@ -2,6 +2,8 @@
 
 #include <mpi.h>
 
+#include <algorithm>
+#include <array>
 #include <iostream>
 #include <limits>
 
@@ -35,22 +37,9 @@ ForwardIt min_element(ForwardIt first, ForwardIt last)
 template <typename Iter>
 typename Iter::value_type getSecondLowest(Iter begin, Iter end)
 {
-    typename Iter::value_type secondLowest = std::numeric_limits<typename Iter::value_type>::max() - 1;
-    typename Iter::value_type lowest       = std::numeric_limits<typename Iter::value_type>::max();
-    for (; begin != end; ++begin)
-    {
-        if (*begin > lowest)
-        {
-            secondLowest = lowest;
-            lowest       = *begin;
-        }
-        else if (*begin > secondLowest && *begin != lowest)
-        {
-            secondLowest = *begin;
-        }
-    }
-
-    return secondLowest;
+    std::array<typename Iter::value_type, 2> temp;
+    std::partial_sort_copy(begin, end, temp.begin(), temp.end());
+    return temp[1];
 }
 
 template <typename T>

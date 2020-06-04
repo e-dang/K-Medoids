@@ -57,33 +57,41 @@ private:
     void maximizeIterImpl(const int centroidIdx, Matrix<T>* const dissimilarityMat, const Matrix<T>* const data,
                           Clusters<T>* const clusters, DistanceMatrix<T>* const distMat) const
     {
-        std::vector<T> totals(data->rows());
+        std::vector<T> totals(data->numRows(), std::numeric_limits<T>::max());
+        auto selected = clusters->selected();
+
         for (const auto& candidate : clusters->unselected())
         {
-            std::vector<T> contributionVec;
-            contributionVec.reserve(clusters->numCandidates() - 1);
-            for (const auto& point : clusters->unselected())
+            if (std::find(selected.cbegin(), selected.cend(), candidate) != selected.cend())
             {
-                if (candidate != point)
+                std::vector<T> contributionVec;
+                contributionVec.reserve(clusters->numCandidates() - 1);
+                for (const auto& point : clusters->unselected())
                 {
-                    auto centroidToPointDist        = distMat->distanceToCentroid(point, centroidIdx);
-                    auto pointToClosestCentroidDist = distMat->distanceToClosestCentroid(point);
-                    auto pointToCandidateDist       = distMat->distanceToPoint(candidate, point);
-
-                    if (centroidToPointDist > pointToClosestCentroidDist)
-                        contributionVec.emplace_back(std::min(pointToCandidateDist - pointToClosestCentroidDist, 0.0));
-                    else if (centroidToPointDist == pointToClosestCentroidDist)
+                    if (point != candidate && std::find(selected.cbegin(), selected.cend(), point) != selected.cend())
                     {
-                        auto range                            = distMat->getAllDistancesToCentroids(point);
-                        auto pointToSecondClosestCentroidDist = getSecondLowest(range.first, range.second);
-                        contributionVec.emplace_back(std::min(pointToCandidateDist, pointToSecondClosestCentroidDist) -
-                                                     pointToClosestCentroidDist);
+                        auto centroidToPointDist        = distMat->distanceToCentroid(point, centroidIdx);
+                        auto pointToClosestCentroidDist = distMat->distanceToClosestCentroid(point);
+                        auto pointToCandidateDist       = distMat->distanceToPoint(candidate, point);
+
+                        if (centroidToPointDist > pointToClosestCentroidDist)
+                        {
+                            contributionVec.emplace_back(
+                              std::min(pointToCandidateDist - pointToClosestCentroidDist, 0.0));
+                        }
+                        else if (centroidToPointDist == pointToClosestCentroidDist)
+                        {
+                            auto range                            = distMat->getAllDistancesToCentroids(point);
+                            auto pointToSecondClosestCentroidDist = getSecondLowest(range.first, range.second);
+                            contributionVec.emplace_back(
+                              std::min(pointToSecondClosestCentroidDist, pointToCandidateDist) -
+                              pointToClosestCentroidDist);
+                        }
                     }
                 }
+                totals[candidate] = std::accumulate(contributionVec.cbegin(), contributionVec.cend(), 0.0);
             }
-            totals[candidate] = std::accumulate(contributionVec.cbegin(), contributionVec.cend(), 0.0);
         }
-
         dissimilarityMat->set(centroidIdx, totals);
     }
 };
