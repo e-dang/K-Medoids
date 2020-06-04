@@ -39,6 +39,7 @@ const Clusters<value_t>* calcClusters(KMediods<value_t, parallelism>* kmediods, 
     for (int i = 0; i < numIters; ++i)
     {
         kmediods->reset();
+        boost::timer::auto_cpu_timer t;
         results = kmediods->fit(data, numClusters, repeats);
     }
 
@@ -51,6 +52,7 @@ const Clusters<value_t>* calcClusters(CLARAKMediods<value_t, parallelism>* kmedi
     for (int i = 0; i < numIters; ++i)
     {
         kmediods->reset();
+        boost::timer::auto_cpu_timer t;
         results = kmediods->fit(data, numClusters, repeats, claraRepeats);
     }
 
@@ -66,13 +68,11 @@ void sharedMemory(std::string& filepath)
     const Clusters<value_t>* results;
 
     auto data = reader.read(filepath, numData, dims);
-    {
-        boost::timer::auto_cpu_timer t;
-        results = calcClusters(&kmediods, &data);
-    }
+
+    results = calcClusters(&kmediods, &data);
 
     std::cout << "Error: " << results->getError() << "\n";
-    // writer.writeClusterResults(results, 0, filepath);
+    writer.writeClusterResults(results, 0, filepath);
 }
 
 void distributed(std::string& filepath)
@@ -91,10 +91,7 @@ void distributed(std::string& filepath)
     if (rank == 0)
         data = reader.read(filepath, numData, dims);
 
-    {
-        boost::timer::auto_cpu_timer t;
-        results = calcClusters(&kmediods, &data);
-    }
+    results = calcClusters(&kmediods, &data);
 
     if (rank == 0)
     {
