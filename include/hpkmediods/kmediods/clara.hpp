@@ -4,7 +4,7 @@
 
 namespace hpkmediods
 {
-template <typename T, Parallelism Level = Parallelism::Serial, class DistanceFunc = L2Norm<T>>
+template <typename T, Parallelism Level = Parallelism::Serial, class DistanceFunc = L1Norm<T>>
 class CLARAKMediods
 {
 public:
