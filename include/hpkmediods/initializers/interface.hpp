@@ -14,6 +14,6 @@ public:
     virtual ~IInitializer() = default;
 
     virtual void initialize(const Matrix<T>* const data, Clusters<T>* const clusters,
-                            DistanceMatrix<T>* const distMat) const = 0;
+                            const DistanceMatrix<T>* const distMat) const = 0;
 };
 }  // namespace hpkmediods

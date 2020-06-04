@@ -14,7 +14,7 @@ class PAMBuild : public IInitializer<T>
 {
 public:
     void initialize(const Matrix<T>* const data, Clusters<T>* const clusters,
-                    DistanceMatrix<T>* const distMat) const override
+                    const DistanceMatrix<T>* const distMat) const override
     {
         initializeFirstCentroid(data, clusters, distMat);
 
@@ -30,7 +30,7 @@ public:
 
 private:
     void initializeFirstCentroid(const Matrix<T>* const data, Clusters<T>* const clusters,
-                                 DistanceMatrix<T>* const distMat) const
+                                 const DistanceMatrix<T>* const distMat) const
     {
         auto distanceSums = calculateDistanceSums(distMat);
         auto minIdx = std::distance(distanceSums.begin(), std::min_element(distanceSums.begin(), distanceSums.end()));
