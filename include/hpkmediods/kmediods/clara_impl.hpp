@@ -140,7 +140,8 @@ private:
         {
             MPI_Status status;
             MPI_Recv(&m_blank, 1, MPI_INT, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
-            processResults(data, centroidBuffer, status);
+            if (status.MPI_TAG == COMPLETED_TAG)
+                processResults(data, centroidBuffer, status);
             MPI_Send(&m_blank, 1, MPI_INT, status.MPI_SOURCE, TERMINATE_TAG, MPI_COMM_WORLD);
         }
     }
