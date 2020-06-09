@@ -33,5 +33,5 @@
 
 build
 .vscode
-data
 .DS_Store
+bin/

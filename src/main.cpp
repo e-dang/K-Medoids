@@ -96,7 +96,7 @@ void distributed(std::string& filepath)
     if (rank == 0)
     {
         std::cout << "Error: " << results->getError() << "\n";
-        // writer.writeClusterResults(results, 0, filepath);
+        writer.writeClusterResults(results, 0, filepath);
     }
 
     MPI_Finalize();
@@ -104,8 +104,7 @@ void distributed(std::string& filepath)
 
 int main(int argc, char* argv[])
 {
-    std::string filepath = "/Users/ericdang/Documents/High_Performance_Computing_Fall_2019/K-Mediods/data/test_" +
-                           std::to_string(numData) + "_" + std::to_string(dims) + ".txt";
+    std::string filepath = /* INSERT PATH HERE*/ std::to_string(numData) + "_" + std::to_string(dims) + ".txt";
 
     std::cout << "Method: " << kmediodsMethod << "\nParallelism: " << parallelismToString(parallelism)
               << "\nData: " << filepath << '\n';
