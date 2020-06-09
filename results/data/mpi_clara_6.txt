@@ -1,21 +1,15 @@
 Method: CLARA
 Parallelism: mpi
-Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
 Method: CLARA
 Parallelism: mpi
-Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
 Method: CLARA
 Parallelism: mpi
-Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
 Method: CLARA
 Parallelism: mpi
-Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
 Method: CLARA
 Parallelism: mpi
-Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
 Method: CLARA
 Parallelism: mpi
-Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
  0.026732s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (74.8%)
  0.039291s wall, 0.040000s user + 0.000000s system = 0.040000s CPU (101.8%)
  0.039338s wall, 0.040000s user + 0.000000s system = 0.040000s CPU (101.7%)

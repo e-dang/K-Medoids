@@ -1,11 +1,11 @@
-#include <hpkmediods/types/selected_set.hpp>
+#include <hpkmedoids/types/selected_set.hpp>
 #include <numeric>
 #ifndef __clang__
     #include <algorithm>
     #include <stdexcept>
 #endif
 
-namespace hpkmediods
+namespace hpkmedoids
 {
 SelectedSet::SelectedSet() : m_numClusters(0), m_unselected(), m_selected() {}
 
@@ -68,4 +68,4 @@ int32_t SelectedSet::selectedSize() const { return static_cast<int32_t>(m_select
 int32_t SelectedSet::unselectedSize() const { return static_cast<int32_t>(m_unselected.size()); }
 
 int32_t SelectedSet::maxSelectedSize() const { return m_numClusters; }
-}  // namespace hpkmediods
+}  // namespace hpkmedoids

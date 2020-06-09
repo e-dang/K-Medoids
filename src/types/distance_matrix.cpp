@@ -1,9 +1,9 @@
-#include <hpkmediods/types/distance_matrix.hpp>
-#include <hpkmediods/utils/utils.hpp>
+#include <hpkmedoids/types/distance_matrix.hpp>
+#include <hpkmedoids/utils/utils.hpp>
 #include <limits>
 #include <numeric>
 
-namespace hpkmediods
+namespace hpkmedoids
 {
 template <typename T>
 DistanceMatrix<T>::DistanceMatrix()
@@ -85,4 +85,4 @@ int32_t DistanceMatrix<T>::numCentroids() const
 
 template class DistanceMatrix<float>;
 template class DistanceMatrix<double>;
-}  // namespace hpkmediods
+}  // namespace hpkmedoids

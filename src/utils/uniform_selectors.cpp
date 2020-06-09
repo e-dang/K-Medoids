@@ -1,9 +1,9 @@
 #include <boost/generator_iterator.hpp>
 #include <boost/random.hpp>
 #include <chrono>
-#include <hpkmediods/utils/uniform_selectors.hpp>
+#include <hpkmedoids/utils/uniform_selectors.hpp>
 
-namespace hpkmediods
+namespace hpkmedoids
 {
 typedef boost::random::mt19937 RNGType;
 
@@ -33,4 +33,4 @@ std::set<int32_t> UniformSelector::select(const int sampleSize, const int32_t co
 
     return selections;
 }
-}  // namespace hpkmediods
+}  // namespace hpkmedoids

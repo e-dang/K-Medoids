@@ -1,7 +1,7 @@
-#include <hpkmediods/types/clusters.hpp>
+#include <hpkmedoids/types/clusters.hpp>
 #include <limits>
 
-namespace hpkmediods
+namespace hpkmedoids
 {
 template <typename T>
 Clusters<T>::Clusters() :
@@ -114,4 +114,4 @@ const T Clusters<T>::getError() const
 
 template class Clusters<float>;
 template class Clusters<double>;
-}  // namespace hpkmediods
+}  // namespace hpkmedoids

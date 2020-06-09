@@ -1,6 +1,5 @@
 Method: REG
 Parallelism: serial
-Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
  588.814030s wall, 587.860000s user + 0.730000s system = 588.590000s CPU (100.0%)
  585.572612s wall, 584.660000s user + 0.680000s system = 585.340000s CPU (100.0%)
  584.187085s wall, 583.310000s user + 0.650000s system = 583.960000s CPU (100.0%)

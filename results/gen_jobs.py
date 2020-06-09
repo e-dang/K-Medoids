@@ -72,15 +72,15 @@ class JobWriter:
 
     def __write_programs(self):
         if self.parallelism == SERIAL:
-            self.job += f'../build/kmediods_{self.parallelism}_reg > {self.parallelism}_reg.txt\n'
-            self.job += f'../build/kmediods_{self.parallelism}_clara > {self.parallelism}_clara.txt\n'
+            self.job += f'../build/kmedoids_{self.parallelism}_reg > {self.parallelism}_reg.txt\n'
+            self.job += f'../build/kmedoids_{self.parallelism}_clara > {self.parallelism}_clara.txt\n'
         elif self.parallelism == OMP:
-            self.job += f'../build/kmediods_{self.parallelism}_reg > {self.parallelism}_reg_{self.num_threads}.txt\n'
-            self.job += f'../build/kmediods_{self.parallelism}_clara > {self.parallelism}_clara_{self.num_threads}.txt\n'
+            self.job += f'../build/kmedoids_{self.parallelism}_reg > {self.parallelism}_reg_{self.num_threads}.txt\n'
+            self.job += f'../build/kmedoids_{self.parallelism}_clara > {self.parallelism}_clara_{self.num_threads}.txt\n'
         elif self.parallelism == MPI:
-            self.job += f'mpirun ../build/kmediods_{self.parallelism}_clara > {self.parallelism}_clara_{self.num_procs}.txt\n'
+            self.job += f'mpirun ../build/kmedoids_{self.parallelism}_clara > {self.parallelism}_clara_{self.num_procs}.txt\n'
         elif self.parallelism == HYBRID:
-            self.job += f'mpirun ../build/kmediods_{self.parallelism}_clara >> {self.parallelism}_clara_{self.num_procs}.txt\n'
+            self.job += f'mpirun ../build/kmedoids_{self.parallelism}_clara >> {self.parallelism}_clara_{self.num_procs}.txt\n'
 
 
 def write_serial():

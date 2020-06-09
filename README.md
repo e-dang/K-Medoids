@@ -1,7 +1,7 @@
-# K-Mediods
+# K-Medoids
 
 ## Description
-KMediods library written in C++17 using the Partition Around Mediods (PAM) BUILD and SWAP algorithms, as well as the CLARA approximation algorithm. The PAM algorithms have been implemented for both serial and multi-threaded execution, whereas the CLARA algorithm has been implemented for serial, multi-threaded, distributed, and hybrid (multi-threaded and distributed) execution. Both the parallelism and the distance function can be changed statically at compile time. Benchmarks run on a centOS cluster can be seen below:
+KMedoids library written in C++17 using the Partition Around Medoids (PAM) BUILD and SWAP algorithms, as well as the CLARA approximation algorithm. The PAM algorithms have been implemented for both serial and multi-threaded execution, whereas the CLARA algorithm has been implemented for serial, multi-threaded, distributed, and hybrid (multi-threaded and distributed) execution. Both the parallelism and the distance function can be changed statically at compile time. Benchmarks run on a centOS cluster can be seen below:
 ![](results/plots/omp_pam.png)
 ![](results/plots/omp_clara.png)
 ![](results/plots/mpi_clara.png)

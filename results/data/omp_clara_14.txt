@@ -1,6 +1,5 @@
 Method: CLARA
 Parallelism: omp
-Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
  0.034585s wall, 0.450000s user + 0.000000s system = 0.450000s CPU (1301.1%)
  0.027128s wall, 0.380000s user + 0.000000s system = 0.380000s CPU (1400.8%)
  0.027509s wall, 0.380000s user + 0.010000s system = 0.390000s CPU (1417.7%)

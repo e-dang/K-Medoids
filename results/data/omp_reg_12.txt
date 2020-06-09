@@ -1,6 +1,5 @@
 Method: REG
 Parallelism: omp
-Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
  69.580114s wall, 641.560000s user + 0.440000s system = 642.000000s CPU (922.7%)
  69.743713s wall, 641.450000s user + 0.430000s system = 641.880000s CPU (920.3%)
  69.773730s wall, 642.010000s user + 0.420000s system = 642.430000s CPU (920.7%)

@@ -1,7 +1,7 @@
 #include <fstream>
-#include <hpkmediods/filesystem/file_rotator.hpp>
+#include <hpkmedoids/filesystem/file_rotator.hpp>
 
-namespace hpkmediods
+namespace hpkmedoids
 {
 std::string FileRotator::getUniqueFileName(std::string& baseFilepath, std::string identifier)
 {
@@ -84,4 +84,4 @@ std::string FileRotator::reassemblePath(std::string& newFileName, std::string& e
 
     return newFilePath;
 }
-}  // namespace hpkmediods
+}  // namespace hpkmedoids
