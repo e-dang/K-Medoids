@@ -1,0 +1,14 @@
+Method: CLARA
+Parallelism: serial
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+ 0.146778s wall, 0.150000s user + 0.000000s system = 0.150000s CPU (102.2%)
+ 0.100252s wall, 0.100000s user + 0.000000s system = 0.100000s CPU (99.7%)
+ 0.099319s wall, 0.100000s user + 0.000000s system = 0.100000s CPU (100.7%)
+ 0.093302s wall, 0.090000s user + 0.000000s system = 0.090000s CPU (96.5%)
+ 0.098839s wall, 0.100000s user + 0.000000s system = 0.100000s CPU (101.2%)
+ 0.096850s wall, 0.100000s user + 0.000000s system = 0.100000s CPU (103.3%)
+ 0.102846s wall, 0.100000s user + 0.000000s system = 0.100000s CPU (97.2%)
+ 0.089771s wall, 0.090000s user + 0.000000s system = 0.090000s CPU (100.3%)
+ 0.107921s wall, 0.110000s user + 0.000000s system = 0.110000s CPU (101.9%)
+ 0.098219s wall, 0.100000s user + 0.000000s system = 0.100000s CPU (101.8%)
+Error: 3.82865e+07

@@ -1,0 +1,41 @@
+num threads = 12
+Method: CLARA
+Parallelism: hybrid
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: hybrid
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: hybrid
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+ 0.093272s wall, 0.150000s user + 0.020000s system = 0.170000s CPU (182.3%)
+ 0.106773s wall, 0.180000s user + 0.030000s system = 0.210000s CPU (196.7%)
+ 0.107155s wall, 0.180000s user + 0.030000s system = 0.210000s CPU (196.0%)
+ 0.062847s wall, 0.120000s user + 0.000000s system = 0.120000s CPU (190.9%)
+ 0.061428s wall, 0.130000s user + 0.020000s system = 0.150000s CPU (244.2%)
+ 0.061813s wall, 0.130000s user + 0.020000s system = 0.150000s CPU (242.7%)
+ 0.074793s wall, 0.130000s user + 0.000000s system = 0.130000s CPU (173.8%)
+ 0.074743s wall, 0.160000s user + 0.020000s system = 0.180000s CPU (240.8%)
+ 0.074750s wall, 0.160000s user + 0.030000s system = 0.190000s CPU (254.2%)
+ 0.073516s wall, 0.150000s user + 0.010000s system = 0.160000s CPU (217.6%)
+ 0.073515s wall, 0.130000s user + 0.010000s system = 0.140000s CPU (190.4%)
+ 0.073525s wall, 0.160000s user + 0.020000s system = 0.180000s CPU (244.8%)
+ 0.063231s wall, 0.110000s user + 0.010000s system = 0.120000s CPU (189.8%)
+ 0.063198s wall, 0.140000s user + 0.020000s system = 0.160000s CPU (253.2%)
+ 0.063192s wall, 0.130000s user + 0.020000s system = 0.150000s CPU (237.4%)
+ 0.066986s wall, 0.130000s user + 0.000000s system = 0.130000s CPU (194.1%)
+ 0.066937s wall, 0.150000s user + 0.010000s system = 0.160000s CPU (239.0%)
+ 0.066946s wall, 0.160000s user + 0.020000s system = 0.180000s CPU (268.9%)
+ 0.072461s wall, 0.150000s user + 0.020000s system = 0.170000s CPU (234.6%)
+ 0.072479s wall, 0.130000s user + 0.010000s system = 0.140000s CPU (193.2%)
+ 0.072464s wall, 0.160000s user + 0.020000s system = 0.180000s CPU (248.4%)
+ 0.067250s wall, 0.140000s user + 0.000000s system = 0.140000s CPU (208.2%)
+ 0.067262s wall, 0.150000s user + 0.020000s system = 0.170000s CPU (252.7%)
+ 0.067264s wall, 0.150000s user + 0.030000s system = 0.180000s CPU (267.6%)
+ 0.065498s wall, 0.140000s user + 0.010000s system = 0.150000s CPU (229.0%)
+ 0.065545s wall, 0.130000s user + 0.010000s system = 0.140000s CPU (213.6%)
+ 0.065502s wall, 0.150000s user + 0.010000s system = 0.160000s CPU (244.3%)
+ 0.075535s wall, 0.140000s user + 0.000000s system = 0.140000s CPU (185.3%)
+Error: 3.7727e+07
+ 0.075551s wall, 0.170000s user + 0.030000s system = 0.200000s CPU (264.7%)
+ 0.075560s wall, 0.160000s user + 0.030000s system = 0.190000s CPU (251.5%)

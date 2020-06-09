@@ -1,0 +1,14 @@
+Method: REG
+Parallelism: serial
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+ 588.814030s wall, 587.860000s user + 0.730000s system = 588.590000s CPU (100.0%)
+ 585.572612s wall, 584.660000s user + 0.680000s system = 585.340000s CPU (100.0%)
+ 584.187085s wall, 583.310000s user + 0.650000s system = 583.960000s CPU (100.0%)
+ 585.929628s wall, 585.010000s user + 0.710000s system = 585.720000s CPU (100.0%)
+ 585.964183s wall, 585.020000s user + 0.730000s system = 585.750000s CPU (100.0%)
+ 584.547353s wall, 583.650000s user + 0.670000s system = 584.320000s CPU (100.0%)
+ 584.335018s wall, 583.530000s user + 0.580000s system = 584.110000s CPU (100.0%)
+ 584.566932s wall, 583.660000s user + 0.690000s system = 584.350000s CPU (100.0%)
+ 583.634646s wall, 582.740000s user + 0.670000s system = 583.410000s CPU (100.0%)
+ 585.622983s wall, 584.710000s user + 0.690000s system = 585.400000s CPU (100.0%)
+Error: 2.75313e+07

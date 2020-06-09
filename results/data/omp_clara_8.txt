@@ -1,0 +1,14 @@
+Method: CLARA
+Parallelism: omp
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+ 0.049920s wall, 0.390000s user + 0.010000s system = 0.400000s CPU (801.3%)
+ 0.023737s wall, 0.190000s user + 0.000000s system = 0.190000s CPU (800.5%)
+ 0.025048s wall, 0.200000s user + 0.000000s system = 0.200000s CPU (798.5%)
+ 0.024500s wall, 0.200000s user + 0.000000s system = 0.200000s CPU (816.3%)
+ 0.025491s wall, 0.200000s user + 0.000000s system = 0.200000s CPU (784.6%)
+ 0.027570s wall, 0.220000s user + 0.000000s system = 0.220000s CPU (798.0%)
+ 0.025147s wall, 0.200000s user + 0.000000s system = 0.200000s CPU (795.3%)
+ 0.025306s wall, 0.200000s user + 0.000000s system = 0.200000s CPU (790.3%)
+ 0.024346s wall, 0.200000s user + 0.000000s system = 0.200000s CPU (821.5%)
+ 0.025628s wall, 0.200000s user + 0.000000s system = 0.200000s CPU (780.4%)
+Error: 4.12818e+07

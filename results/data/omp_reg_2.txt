@@ -1,0 +1,14 @@
+Method: REG
+Parallelism: omp
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+ 334.168649s wall, 658.290000s user + 0.510000s system = 658.800000s CPU (197.1%)
+ 333.838237s wall, 657.280000s user + 0.500000s system = 657.780000s CPU (197.0%)
+ 334.136403s wall, 657.740000s user + 0.490000s system = 658.230000s CPU (197.0%)
+ 333.885850s wall, 656.370000s user + 0.510000s system = 656.880000s CPU (196.7%)
+ 333.752907s wall, 657.540000s user + 0.500000s system = 658.040000s CPU (197.2%)
+ 334.152367s wall, 657.360000s user + 0.510000s system = 657.870000s CPU (196.9%)
+ 334.121831s wall, 657.830000s user + 0.490000s system = 658.320000s CPU (197.0%)
+ 333.680629s wall, 657.330000s user + 0.500000s system = 657.830000s CPU (197.1%)
+ 333.835162s wall, 657.160000s user + 0.490000s system = 657.650000s CPU (197.0%)
+ 334.059730s wall, 657.650000s user + 0.500000s system = 658.150000s CPU (197.0%)
+Error: 2.75313e+07

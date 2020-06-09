@@ -1,0 +1,28 @@
+num threads = 12
+Method: CLARA
+Parallelism: hybrid
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: hybrid
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+ 0.152364s wall, 0.140000s user + 0.010000s system = 0.150000s CPU (98.4%)
+ 0.155426s wall, 0.160000s user + 0.000000s system = 0.160000s CPU (102.9%)
+ 0.111116s wall, 0.110000s user + 0.000000s system = 0.110000s CPU (99.0%)
+ 0.111132s wall, 0.100000s user + 0.010000s system = 0.110000s CPU (99.0%)
+ 0.121896s wall, 0.130000s user + 0.000000s system = 0.130000s CPU (106.6%)
+ 0.121905s wall, 0.110000s user + 0.010000s system = 0.120000s CPU (98.4%)
+ 0.124650s wall, 0.120000s user + 0.000000s system = 0.120000s CPU (96.3%)
+ 0.124656s wall, 0.120000s user + 0.000000s system = 0.120000s CPU (96.3%)
+ 0.111009s wall, 0.110000s user + 0.000000s system = 0.110000s CPU (99.1%)
+ 0.111017s wall, 0.110000s user + 0.010000s system = 0.120000s CPU (108.1%)
+ 0.108172s wall, 0.110000s user + 0.000000s system = 0.110000s CPU (101.7%)
+ 0.108179s wall, 0.100000s user + 0.000000s system = 0.100000s CPU (92.4%)
+ 0.119328s wall, 0.120000s user + 0.000000s system = 0.120000s CPU (100.6%)
+ 0.119336s wall, 0.120000s user + 0.010000s system = 0.130000s CPU (108.9%)
+ 0.121467s wall, 0.120000s user + 0.000000s system = 0.120000s CPU (98.8%)
+ 0.121462s wall, 0.110000s user + 0.000000s system = 0.110000s CPU (90.6%)
+ 0.113699s wall, 0.110000s user + 0.000000s system = 0.110000s CPU (96.7%)
+ 0.113707s wall, 0.110000s user + 0.010000s system = 0.120000s CPU (105.5%)
+ 0.117508s wall, 0.120000s user + 0.000000s system = 0.120000s CPU (102.1%)
+Error: 3.93041e+07
+ 0.117515s wall, 0.110000s user + 0.000000s system = 0.110000s CPU (93.6%)

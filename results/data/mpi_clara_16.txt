@@ -1,0 +1,209 @@
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+ 0.027103s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (110.7%)
+ 0.030493s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (98.4%)
+ 0.029589s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (101.4%)
+ 0.030500s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (65.6%)
+ 0.030694s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (97.7%)
+ 0.030381s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (98.7%)
+ 0.030021s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (99.9%)
+ 0.030500s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (98.4%)
+ 0.030703s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (97.7%)
+ 0.030501s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (98.4%)
+ 0.030696s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (97.7%)
+ 0.030455s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (98.5%)
+ 0.030687s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (97.8%)
+ 0.030501s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (98.4%)
+ 0.030693s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (97.7%)
+ 0.030501s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (98.4%)
+ 0.022521s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022523s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022519s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022517s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022517s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022525s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022514s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022528s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022523s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022520s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022516s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022517s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022521s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022531s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022522s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.022521s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (88.8%)
+ 0.023223s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.1%)
+ 0.023218s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.1%)
+ 0.023216s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.1%)
+ 0.023223s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (129.2%)
+ 0.023214s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.2%)
+ 0.023225s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.1%)
+ 0.023221s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (129.2%)
+ 0.023225s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.1%)
+ 0.023218s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (129.2%)
+ 0.023225s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (129.2%)
+ 0.023217s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.1%)
+ 0.023224s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.1%)
+ 0.023215s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.2%)
+ 0.023219s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (129.2%)
+ 0.023219s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (129.2%)
+ 0.023219s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (86.1%)
+ 0.022414s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (89.2%)
+ 0.022414s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (133.8%)
+ 0.022416s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (133.8%)
+ 0.022408s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (89.3%)
+ 0.022409s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (89.3%)
+ 0.022417s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (89.2%)
+ 0.022410s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (89.2%)
+ 0.022410s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (89.2%)
+ 0.022409s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (133.9%)
+ 0.022413s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (89.2%)
+ 0.022411s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (89.2%)
+ 0.022409s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (133.9%)
+ 0.022408s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (133.9%)
+ 0.022416s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (133.8%)
+ 0.022412s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (89.2%)
+ 0.022414s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (133.8%)
+ 0.024178s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024185s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024181s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024183s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024183s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (124.1%)
+ 0.024182s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024185s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (124.0%)
+ 0.024185s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (124.0%)
+ 0.024190s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024185s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024189s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024178s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024185s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024181s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024183s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.024179s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (82.7%)
+ 0.023838s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.023843s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (125.8%)
+ 0.023838s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (125.8%)
+ 0.023842s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.023839s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.023834s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.023841s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (125.8%)
+ 0.023837s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.023842s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.023839s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (125.8%)
+ 0.023845s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.023841s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (125.8%)
+ 0.023845s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (125.8%)
+ 0.023837s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.023844s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.023843s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (83.9%)
+ 0.025352s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.3%)
+ 0.025349s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.3%)
+ 0.025352s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.9%)
+ 0.025354s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.9%)
+ 0.025356s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.3%)
+ 0.025350s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.3%)
+ 0.025348s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.4%)
+ 0.025353s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.9%)
+ 0.025351s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.3%)
+ 0.025348s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.4%)
+ 0.025351s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.9%)
+ 0.025350s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.3%)
+ 0.025348s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.9%)
+ 0.025348s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.9%)
+ 0.025352s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.3%)
+ 0.025355s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (118.3%)
+ 0.025452s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (117.9%)
+ 0.025459s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.6%)
+ 0.025451s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (117.9%)
+ 0.025459s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (117.8%)
+ 0.025452s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (117.9%)
+ 0.025457s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.6%)
+ 0.025451s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.6%)
+ 0.025450s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.6%)
+ 0.025462s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (117.8%)
+ 0.025454s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.6%)
+ 0.025462s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.5%)
+ 0.025458s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (117.8%)
+ 0.025460s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (117.8%)
+ 0.025452s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (117.9%)
+ 0.025455s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (117.9%)
+ 0.025456s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (78.6%)
+ 0.024557s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.4%)
+ 0.024554s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024550s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.2%)
+ 0.024557s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.4%)
+ 0.024559s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.4%)
+ 0.024558s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.4%)
+ 0.024558s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.2%)
+ 0.024563s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.1%)
+ 0.024552s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.2%)
+ 0.024551s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024556s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.2%)
+ 0.024555s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.2%)
+ 0.024555s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024555s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024559s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.4%)
+ 0.024561s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.1%)
+ 0.024537s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.3%)
+ 0.024531s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.3%)
+ 0.024539s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024537s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024536s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024529s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.3%)
+ 0.024536s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.3%)
+ 0.024530s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024533s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024537s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+Error: 3.77875e+07
+ 0.024538s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.3%)
+ 0.024538s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024534s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024540s wall, 0.030000s user + 0.000000s system = 0.030000s CPU (122.2%)
+ 0.024534s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)
+ 0.024527s wall, 0.020000s user + 0.000000s system = 0.020000s CPU (81.5%)

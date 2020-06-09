@@ -1,0 +1,27 @@
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+Method: CLARA
+Parallelism: mpi
+Data: /u/home/e/ericdang/KMediods/data/test_10000_10.txt
+ 0.077001s wall, 0.080000s user + 0.000000s system = 0.080000s CPU (103.9%)
+ 0.079128s wall, 0.080000s user + 0.000000s system = 0.080000s CPU (101.1%)
+ 0.068400s wall, 0.060000s user + 0.000000s system = 0.060000s CPU (87.7%)
+ 0.068407s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (102.3%)
+ 0.064928s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (107.8%)
+ 0.064928s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (107.8%)
+ 0.064204s wall, 0.060000s user + 0.000000s system = 0.060000s CPU (93.5%)
+ 0.064206s wall, 0.060000s user + 0.000000s system = 0.060000s CPU (93.4%)
+ 0.065033s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (107.6%)
+ 0.065032s wall, 0.060000s user + 0.000000s system = 0.060000s CPU (92.3%)
+ 0.068500s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (102.2%)
+ 0.068501s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (102.2%)
+ 0.077914s wall, 0.080000s user + 0.000000s system = 0.080000s CPU (102.7%)
+ 0.077918s wall, 0.080000s user + 0.000000s system = 0.080000s CPU (102.7%)
+ 0.065331s wall, 0.060000s user + 0.000000s system = 0.060000s CPU (91.8%)
+ 0.065332s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (107.1%)
+ 0.071915s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (97.3%)
+ 0.071916s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (97.3%)
+ 0.066046s wall, 0.070000s user + 0.000000s system = 0.070000s CPU (106.0%)
+Error: 4.41555e+07
+ 0.066048s wall, 0.060000s user + 0.000000s system = 0.060000s CPU (90.8%)
