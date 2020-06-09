@@ -1,5 +1,5 @@
 find_package(MPI REQUIRED)
-find_package(Boost 1.72.0 COMPONENTS random, timer)
+find_package(Boost 1.71.0 COMPONENTS random, timer)
 
 add_library(hpkmediods types/parallelism.cpp
                        types/selected_set.cpp
