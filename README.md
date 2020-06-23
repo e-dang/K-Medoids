@@ -36,7 +36,7 @@ make
 ```
 
 ## Usage
-This library may be imported into an existing C++ project in which case you need to compile and link the hpkmeans library to your project, then add the include statement to the top level __kmedoids.hpp__ header file to start using it.
+This library may be imported into an existing C++ project in which case you need to compile and link the hpkmedoids library to your project, then add the include statement to the top level __kmedoids.hpp__ header file to start using it.
 ```
 #include <hpkmedoids/kmedoids.hpp>
 ```
