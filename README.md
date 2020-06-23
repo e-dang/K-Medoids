@@ -3,9 +3,11 @@
 ## Description
 KMedoids library written in C++17 using the Partition Around Medoids (PAM) BUILD and SWAP algorithms, as well as the CLARA approximation algorithm. The PAM algorithms have been implemented for both serial and multi-threaded execution, whereas the CLARA algorithm has been implemented for serial, multi-threaded, distributed, and hybrid (multi-threaded and distributed) execution. Multi-threaded and distributed execution were implemented using the OpenMP and OpenMPI libraries. Both the parallelism and the distance function can be changed statically at compile time. Benchmark runs on a centOS cluster using a dataset consisting of 10,000 datapoints each with dimensionality of 10, organized into 10 clusters, where each cluster was generated from a guassian distribution with standard deviation of 6 in a (-100, 100) box can be seen below. The times reported are the averages over 10 independent runs. In addition, the CLARA algorithm used 10 repeats for each independent run. The scripts used to generate the test data and plot the results can be found in the __results__ directory.
 
-<div>
+<div style="text-align:center">
 <img src="results/plots/omp_pam.png" width="300"/>
 <img src="results/plots/omp_clara.png" width="300"/>
+</div>
+<div style="text-align:center">
 <img src="results/plots/mpi_clara.png" width="300"/>
 <img src="results/plots/hybrid_clara.png" width="300"/>
 </div>
