@@ -31,14 +31,11 @@ def read_data(filepath, num_data, num_features, data_format='d'):
         i = 0
         while data:
             ind = i // num_features
-            # if ind == 10:
-            #     break
             vals[ind].append(struct.unpack(data_format, data)[0])
             data = file.read(8)
             i += 1
     ret = np.concatenate([np.array(i) for i in vals]).reshape((-1, num_features))
     return ret[~np.isnan(ret)].reshape((-1, 2))
-    # return ret
 
 
 def read_clustering(filepath):
@@ -57,24 +54,29 @@ def plot_data(data, clusters, clustering):
     new_colors = [colors[i] for i in clustering]
     plt.scatter(data[:, 0], data[:, 1], c=new_colors)
     plt.scatter(clusters[:, 0], clusters[:, 1], c='black')
-
     plt.show()
 
 
-NUM_DATA = 5000
+NUM_DATA = 10000
 NUM_FEATURES = 2
 NUM_CLUSTERS = 10
 CLUSTER_STD = 6
 BOX = (-100, 100)
 
+
+'''
+UNCOMMENT OUT THIS SECTION TO GENERATE DATA
+'''
 # data = generate_data(NUM_DATA, NUM_FEATURES, NUM_CLUSTERS, CLUSTER_STD, BOX,
 #                      f'test_{NUM_DATA}_{NUM_FEATURES}.txt', f'data_labels_{NUM_DATA}_{NUM_FEATURES}.txt')
 
-
-num = 5000
-dims = 2
-file_num = 0
-data = read_data(f'test_{num}_{dims}.txt', num, dims)
-clusters = read_data(f'test_{num}_{dims}_clusters_{file_num}.txt', num, dims)
-clustering = read_clustering(f'test_{num}_{dims}_clustering_{file_num}.txt')
-plot_data(data, clusters, clustering)
+'''
+UNCOMMENT OUT THIS SECTION TO PLOT CLUSTERING RESULTS
+'''
+# num = 10000
+# dims = 2
+# file_num = 0
+# data = read_data(f'test_{num}_{dims}.txt', num, dims)
+# clusters = read_data(f'test_{num}_{dims}_clusters_{file_num}.txt', num, dims)
+# clustering = read_clustering(f'test_{num}_{dims}_clustering_{file_num}.txt')
+# plot_data(data, clusters, clustering)
