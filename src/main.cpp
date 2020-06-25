@@ -32,6 +32,7 @@ constexpr int numClusters         = 10;
 constexpr int numIters            = 10;
 constexpr int repeats             = 1;
 constexpr int claraRepeats        = 10;
+int64_t runTime;
 
 const Clusters<value_t>* calcClusters(KMedoids<value_t, parallelism>* kmedoids, const Matrix<value_t>* const data)
 {
@@ -41,6 +42,7 @@ const Clusters<value_t>* calcClusters(KMedoids<value_t, parallelism>* kmedoids, 
         kmedoids->reset();
         boost::timer::auto_cpu_timer t;
         results = kmedoids->fit(data, numClusters, repeats);
+        runTime += t.elapsed().wall;
     }
 
     return results;
@@ -54,6 +56,7 @@ const Clusters<value_t>* calcClusters(CLARAKMedoids<value_t, parallelism>* kmedo
         kmedoids->reset();
         boost::timer::auto_cpu_timer t;
         results = kmedoids->fit(data, numClusters, repeats, claraRepeats);
+        runTime += t.elapsed().wall;
     }
 
     return results;
@@ -72,7 +75,7 @@ void sharedMemory(std::string& filepath)
     results = calcClusters(&kmedoids, &data);
 
     std::cout << "Error: " << results->getError() << "\n";
-    writer.writeClusterResults(results, 0, filepath);
+    writer.writeClusterResults(results, runTime, filepath);
 }
 
 void distributed(std::string& filepath)
@@ -96,7 +99,7 @@ void distributed(std::string& filepath)
     if (rank == 0)
     {
         std::cout << "Error: " << results->getError() << "\n";
-        writer.writeClusterResults(results, 0, filepath);
+        writer.writeClusterResults(results, runTime, filepath);
     }
 
     MPI_Finalize();
@@ -104,7 +107,8 @@ void distributed(std::string& filepath)
 
 int main(int argc, char* argv[])
 {
-    std::string filepath = /* INSERT PATH HERE*/ std::to_string(numData) + "_" + std::to_string(dims) + ".txt";
+    std::string filepath = /* INSERT PATH HERE */ std::to_string(numData) + "_" + std::to_string(dims) + "_" +
+                           std::to_string(numClusters) + ".txt";
 
     std::cout << "Method: " << kmedoidsMethod << "\nParallelism: " << parallelismToString(parallelism)
               << "\nData: " << filepath << '\n';
